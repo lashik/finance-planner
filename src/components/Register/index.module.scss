@@ -1,0 +1,367 @@
+@use "../utils" as *;
+@use "../global" as *;
+
+.finance-section {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255 255 255);
+  overflow: hidden;
+  background-image: url("../../../public/assets/loginbg.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcome-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0;
+  margin: 215px auto 329px;
+  width: 878px;
+  max-width: 85%;
+
+  @include md {
+    position: relative;
+    margin: 150px auto;
+  }
+
+  @include xs {
+    margin: 80px auto;
+  }
+
+  @include tn {
+    margin: 50px auto;
+  }
+}
+
+.welcome-message {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0;
+  width: 670.953125px;
+  max-width: 85%;
+}
+
+.title-box {
+  font: 700 52px/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(0 0 0);
+  text-align: center;
+
+  @include md {
+    font-size: 48px;
+  }
+
+  @include xxs {
+    font-size: 36px;
+  }
+}
+
+.title-box-box {
+  display: flex;
+  justify-content: center;
+
+  @include md {
+    align-items: flex-start;
+  }
+}
+
+.title-box-span0 {
+  font: 700 1em/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.title-box-span1 {
+  font: 700 1em/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(0 128 128);
+}
+
+.title-box-span2 {
+  font: 700 1em/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.title-box-span3 {
+  font: 700 1em/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(0 128 128);
+}
+
+.info {
+  display: flex;
+  justify-content: center;
+  font: 700 52px/1.17 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(0 0 0);
+  text-align: center;
+
+  @include md {
+    align-items: flex-start;
+    font-size: 48px;
+  }
+
+  @include xxs {
+    font-size: 36px;
+  }
+}
+
+.info_span0 {
+  font: 700 0.5em/1.15 "Roboto Condensed", Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.info-row {
+  display: flex;
+  column-gap: 16px;
+  width: 100%;
+
+  @include xxs {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px 16px;
+  }
+}
+
+.intro-figure {
+  margin: 9px 0 0;
+  width: 353px;
+  min-width: 0;
+  object-fit: cover;
+
+  @include xxs {
+    position: relative;
+    margin: 0;
+    width: 100%;
+    min-width: unset;
+    max-width: 353px;
+  }
+}
+
+.detail-cards {
+  display: flex;
+  flex-direction: column;
+  width: 509px;
+  min-width: 0;
+  background-color: rgb(255 255 255);
+  border-radius: 10px;
+  box-shadow: 14px 13px 4px 0 rgb(0 0 0 / 25%);
+
+  @include xxs {
+    position: relative;
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+.info-card {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0;
+  margin: 35px auto 55px;
+  width: 380.015625px;
+  max-width: 85%;
+  
+  @include tn {
+    position: relative;
+    margin: 35px auto 50px;
+  }
+}
+
+.name-section {
+  display: flex;
+  align-items: center;
+  column-gap: 0;
+}
+
+.label-name {
+  display: flex;
+  align-items: center;
+  width: 71px;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.icon-name {
+  width: 309px;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.dob-country-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 32px;
+  margin: 23px 5px 0 0;
+
+  @include xs {
+    column-gap: 16px;
+  }
+
+  @include tn {
+    column-gap: 8px;
+  }
+}
+
+.label-dob {
+  display: flex;
+  align-items: center;
+  width: 71px;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.icon-dob {
+  width: 99px;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.label-country {
+  display: flex;
+  align-items: center;
+  width: 71px;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.icon-country {
+  width: 99px;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.email-section {
+  display: flex;
+  align-items: center;
+  column-gap: 0;
+  margin: 23px 0 0;
+}
+
+.label-email {
+  display: flex;
+  align-items: center;
+  width: 71px;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.icon-email {
+  width: 309px;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.number-section {
+  display: flex;
+  align-items: center;
+  column-gap: 0;
+  margin: 26px 0 0;
+}
+
+.label-number {
+  display: flex;
+  align-items: center;
+  width: 71px;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
+
+.icon-number {
+  width: 309px;
+  min-width: 0;
+  object-fit: cover;
+}
+.input-name,.input-email,.input-number{
+  box-sizing: border-box;
+    width: 300px;
+    height: 41px;
+    background: #FEFEFE;
+    border: 3px solid #86DBDB;
+    border-radius: 13px;
+    
+    right: 4px;
+    bottom: 3px;
+}
+.input-dob,.input-country{
+  box-sizing: border-box;
+    width: 100px;
+    height: 41px;
+    background: #FEFEFE;
+    border: 3px solid #86DBDB;
+    border-radius: 13px;
+    
+    right: 4px;
+    bottom: 3px;
+}
+.frame-31 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 47px 76px;
+  gap: 10px;
+ 
+  width: 353px;
+  height: 358px;
+  left: 4px;
+  top: -1px;
+  background: #86DBDB;
+  box-shadow: 2px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+}
+
+/* Frame 30 */
+.frame-30 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 17px;
+  width: 200px;
+  height: 252px;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+/* image 1 */
+.image-1 {
+  width: 200px;
+  height: 200px;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+/* Finance Genius */
+.text-login {
+  width: 200px;
+  height: 35px;
+  font-family: 'Roboto Condensed';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  color: #008080;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.submit-button{
+
+
+
+padding: 0px;
+gap: 8px;
+
+
+width: 94px;
+height: 40px;
+margin-left: 35%;
+top: 50%;
+
+background: #009A9A;
+border-radius: 100px;
+
+}
