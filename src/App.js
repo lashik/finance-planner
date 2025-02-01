@@ -8,6 +8,7 @@ import Register from './components/Register';
 import 'aos/dist/aos.css';
 import './fonts.css';
 import CreatioForm from 'components/CreatioForm';
+import Portfolio from 'components/Portfolio';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/Form" component={CreatioForm} />
           <Route exact path="/" component={Register}/>
           <Route exact path="/Forms" component={Forms} />
+          <Route path="/Portfolio" component={Portfolio} />
         </Switch>
       </Router>
     </>

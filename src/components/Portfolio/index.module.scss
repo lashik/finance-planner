@@ -440,13 +440,12 @@
 }
 
 .profileGrid {
-  display: column;
+  display: grid;
   align-content: center;
   column-gap: 100px;
   width: 100%;
   
-  
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   @include md {
     column-gap: 32px;
   }
@@ -460,12 +459,12 @@
 .block5 {
   display: flex;
   flex-direction: column;
-  grid-row: span 1;
+  
   margin-top: 10px;
   width: 600px;
   height: fit-content;
   overflow: hidden;
-  grid-column: span 1;
+ 
   background-color: rgb(255 255 255);
   border-radius: 1px;
   //
@@ -528,7 +527,7 @@
 .row8 {
   display: flex;
   justify-content:space-between;
-  column-gap: 16px;
+  
   margin: 27px 0 0;
   flex-direction: row;
   @include tn {
@@ -618,7 +617,7 @@
   
    color: #6f7482;
   // letter-spacing: -0.26px;
-  align-items: flex-start;
+  
 }
 
 .profileCard {
