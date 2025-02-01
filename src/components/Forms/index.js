@@ -166,7 +166,7 @@ function Forms(props) {
 
                 <div className={styles.portfolioRow}>
                   <div className={styles.portfolioInfo}>
-                    <article className={styles.portfolioName}>Kashik’s</article>
+                  <Link to="/Portfolio"><article className={styles.portfolioName}>Kashik’s</article></Link>
                     <p className={styles.incomeInfo}>Income: 10000</p>
                     <p className={styles.expenseInfo}>Expenses: 10000</p>
                   </div>
