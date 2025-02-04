@@ -4,22 +4,31 @@
 .finance-section {
   display: flex;
   flex-direction: column;
-  background-color: rgb(255 255 255);
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgb(255, 255, 255);
+  overflow-y:hidden;
   background-image: url("../../../public/assets/loginbg.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  
+  
 }
-
+input {
+  color: transparent;
+}
 .welcome-row {
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: 0;
-  margin: 215px auto 329px;
+  position: absolute;
+  top: 20%;
+  left: 27%;
   width: 878px;
   max-width: 85%;
-
+  
   @include md {
     position: relative;
     margin: 150px auto;
@@ -142,7 +151,7 @@
   background-color: rgb(255 255 255);
   border-radius: 10px;
   box-shadow: 14px 13px 4px 0 rgb(0 0 0 / 25%);
-
+  
   @include xxs {
     position: relative;
     width: 100%;
@@ -189,7 +198,7 @@
   justify-content: space-between;
   align-items: center;
   column-gap: 32px;
-  margin: 23px 5px 0 0;
+  margin: 23px 10px 0 0;
 
   @include xs {
     column-gap: 16px;
@@ -271,26 +280,34 @@
 }
 .input-name,.input-email,.input-number{
   box-sizing: border-box;
-    width: 300px;
-    height: 41px;
-    background: #FEFEFE;
-    border: 3px solid #86DBDB;
-    border-radius: 13px;
-    
-    right: 4px;
-    bottom: 3px;
+  width: 300px;
+  height: 41px;
+  background: #FEFEFE;
+  border: 1px solid #86DBDB;
+  border-radius: 1px;
+  
+  right: 4px;
+  bottom: 3px;
 }
-.input-dob,.input-country{
+.input-country,.input-dob{
   box-sizing: border-box;
-    width: 100px;
-    height: 41px;
-    background: #FEFEFE;
-    border: 3px solid #86DBDB;
-    border-radius: 13px;
-    
-    right: 4px;
-    bottom: 3px;
+  width: 100px;
+  height: 41px;
+  background: #FEFEFE;
+  border: 1px solid #86DBDB;
+  border-radius: 1px;
+  
+  right: 6px;
+  bottom: 3px;
 }
+.input-dob:required:invalid::-webkit-datetime-edit {
+  color: transparent;
+}
+
+.input-dob:not(:placeholder-shown)::-webkit-datetime-edit {
+  color: black;
+}
+
 .frame-31 {
   display: flex;
   flex-direction: row;

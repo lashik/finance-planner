@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Select,Option } from '@mui/joy';
 import styles from './index.module.scss';
-
-function CreatioForm(props) {
+import { Link } from 'react-router-dom';
+function PersonalDetails(props) {
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
       <div className={styles.row}>
@@ -42,9 +42,7 @@ function CreatioForm(props) {
                   src={'/assets/calendar_icon.svg'}
                   alt="alt text"
                 />
-                <figcaption className={styles.sectionTitle}>
-                  Schedules
-                </figcaption>
+                <Link className={styles.sectionTitle} to={'/Dashboard'}>Dashboard</Link>
               </div>
 
               <div className={styles.navItemRow1}>
@@ -53,12 +51,10 @@ function CreatioForm(props) {
                   src={'/assets/calendar_icon.svg'}
                   alt="alt text"
                 />
-                <figcaption className={styles.sectionTitle}>
-                  Portfolios
-                </figcaption>
+                <Link className={styles.sectionTitle} to={'/Portfolio'}>Portfolios</Link>
               </div>
 
-              <div className={styles.subNavSection}>
+              {/* <div className={styles.subNavSection}>
                 <div className={styles.row1}>
                   <img
                     className={styles.image}
@@ -75,19 +71,19 @@ function CreatioForm(props) {
               </div>
 
               <div className={styles.statusRow}>
-                {/* Statuses: Display earnings, declines, payouts */}
+                
                 <div className={styles.color} />
 
                 <div className={styles.row2}>
                   <p className={styles.earningsLabel}>Earnings</p>
                   <p className={styles.refundsInfo}>
-                    {/* TODO */}
+                    
                     Refunds
                   </p>
                   <p className={styles.declinesLabel}>Declines</p>
                   <p className={styles.payoutsLabel}>Payouts</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className={styles.info1}>Settings</div>
 
@@ -287,8 +283,8 @@ function CreatioForm(props) {
   );
 }
 
-CreatioForm.propTypes = {
+PersonalDetails.propTypes = {
   className: PropTypes.string
 };
 
-export default CreatioForm;
+export default PersonalDetails;

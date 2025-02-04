@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Select, Option} from '@mui/joy';
 import {RadioGroup, Radio} from "@heroui/react";
 import styles from './index.module.scss';
-
+import { Link } from 'react-router-dom';
 function Portfolio(props) {
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
@@ -43,9 +43,7 @@ function Portfolio(props) {
                   src={'/assets/calendar_icon.svg'}
                   alt="alt text"
                 />
-                <figcaption className={styles.sectionTitle}>
-                  Schedules
-                </figcaption>
+                <Link className={styles.sectionTitle} to={'/Dashboard'}>Dashboard</Link>
               </div>
 
               <div className={styles.navItemRow1}>
@@ -54,12 +52,10 @@ function Portfolio(props) {
                   src={'/assets/calendar_icon.svg'}
                   alt="alt text"
                 />
-                <figcaption className={styles.sectionTitle}>
-                  Portfolios
-                </figcaption>
+                <Link className={styles.sectionTitle} to={'/Portfolio'}>Portfolios</Link>
               </div>
 
-              <div className={styles.subNavSection}>
+              {/* <div className={styles.subNavSection}>
                 <div className={styles.row1}>
                   <img
                     className={styles.image}
@@ -76,19 +72,19 @@ function Portfolio(props) {
               </div>
 
               <div className={styles.statusRow}>
-                {/* Statuses: Display earnings, declines, payouts */}
+                {/* Statuses: Display earnings, declines, payouts 
                 <div className={styles.color} />
 
                 <div className={styles.row2}>
                   <p className={styles.earningsLabel}>Earnings</p>
                   <p className={styles.refundsInfo}>
-                    {/* TODO */}
+                    {/* TODO *
                     Refunds
                   </p>
                   <p className={styles.declinesLabel}>Declines</p>
                   <p className={styles.payoutsLabel}>Payouts</p>
                 </div>
-              </div>
+              </div> */}
 
               <div className={styles.info1}>Settings</div>
 

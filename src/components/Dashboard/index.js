@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 
-function Forms(props) {
+function Dashboard(props) {
   return (
     <section className={cn(styles.containerSection, props.className, 'forms')}>
       {/* Main content wrap section */}
@@ -50,7 +50,7 @@ function Forms(props) {
                     src={'/assets/2e88fcb844a182e84e257ae1b9b1b2b6.svg'}
                     alt="alt text"
                   />
-                  <a className={styles.scheduleLink}>Schedules</a>
+                  <Link className={styles.scheduleLink} to={'/Dashboard'}>Dashboard</Link>
                 </div>
               </div>
 
@@ -60,10 +60,10 @@ function Forms(props) {
                   src={'/assets/2e88fcb844a182e84e257ae1b9b1b2b6.svg'}
                   alt="alt text"
                 />
-                <a className={styles.portfolioLink}>Portfolios</a>
+                <Link className={styles.portfolioLink} to={'/Portfolio'}>Portfolios</Link>
               </div>
 
-              <div className={styles.incomeNavBlock}>
+              {/* <div className={styles.incomeNavBlock}>
                 <div className={styles.incomeNavItem}>
                   <img
                     className={styles.incomeIcon}
@@ -77,25 +77,25 @@ function Forms(props) {
                     alt="alt text"
                   />
                 </div>
-              </div>
+              </div> */}
 
-              <div className={styles.earningsSection}>
-                {/* Earnings related information */}
+              {/* <div className={styles.earningsSection}>
+                {/* Earnings related information 
                 <div className={styles.divider} />
 
                 <div className={styles.earningsInfo}>
                   <p className={styles.earningsText}>
-                    {/* Earnings title container */}
+                    {/* Earnings title 
                     Earnings
                   </p>
                   <p className={styles.refundsText}>
-                    {/* TODO */}
+                    {/* TODO 
                     Refunds
                   </p>
                   <p className={styles.declinesText}>Declines</p>
                   <p className={styles.payoutsText}>Payouts</p>
                 </div>
-              </div>
+              </div> */}
 
               <article className={styles.settingsArticle}>Settings</article>
 
@@ -186,8 +186,8 @@ function Forms(props) {
   );
 }
 
-Forms.propTypes = {
+Dashboard.propTypes = {
   className: PropTypes.string
 };
 
-export default Forms;
+export default Dashboard;

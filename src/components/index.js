@@ -1,3 +1,3 @@
-import Forms from './Forms';
+import Forms from './Dashboard';
 
 export default { Forms };
