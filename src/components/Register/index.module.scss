@@ -163,7 +163,7 @@ input {
   display: flex;
   flex-direction: column;
   row-gap: 0;
-  margin: 35px auto 55px;
+  margin: 35px auto 25px;
   width: 380.015625px;
   max-width: 85%;
   
@@ -285,7 +285,7 @@ input {
   background: #FEFEFE;
   border: 1px solid #86DBDB;
   border-radius: 1px;
-  
+  color: black;
   right: 4px;
   bottom: 3px;
 }
@@ -296,17 +296,11 @@ input {
   background: #FEFEFE;
   border: 1px solid #86DBDB;
   border-radius: 1px;
-  
+  color: black;
   right: 6px;
   bottom: 3px;
 }
-.input-dob:required:invalid::-webkit-datetime-edit {
-  color: transparent;
-}
 
-.input-dob:not(:placeholder-shown)::-webkit-datetime-edit {
-  color: black;
-}
 
 .frame-31 {
   display: flex;
@@ -366,19 +360,19 @@ input {
   flex-grow: 0;
 }
 .submit-button{
-
-
-
-padding: 0px;
-gap: 8px;
-
-
-width: 94px;
-height: 40px;
-margin-left: 35%;
-top: 50%;
-
-background: #009A9A;
-border-radius: 100px;
-
+  padding: 10px;
+  gap: 8px;
+  width: max-content;
+  height: 40px;
+  
+  top: 50%;
+  background: #63acac;
+  border-radius: 100px;
+  align-items: center;
+}
+.button-section{
+  display: flex;
+  flex-direction: row;
+  
+  justify-content: space-evenly;
 }

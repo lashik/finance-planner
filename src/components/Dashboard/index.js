@@ -4,6 +4,7 @@ import cn from 'classnames';
 import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 import Sidebar from 'components/Sidebar';
+import Header from 'components/Header';
 
 function Dashboard(props) {
   return (
@@ -17,28 +18,7 @@ function Dashboard(props) {
 
         <section className={styles.mainContentSection}>
           {/* Main section for portfolio and search */}
-
-          <div className={styles.searchBlock}>
-            {/* Search functionality block */}
-
-            <div className={styles.searchRow}>
-              <img
-                className={styles.searchLogo}
-                src={'/assets/765d4746d81e03a06500e5692ea132ab.png'}
-                alt="alt text"
-              />
-
-              <button className={styles.searchBtn}>
-                {/* TODO */}
-                <img
-                  className={styles.searchIcon}
-                  src={'/assets/0ab9176ee42535cf4c9aff81f7a7a19d.svg'}
-                  alt="alt text"
-                />
-                <p className={styles.searchText}>Search</p>
-              </button>
-            </div>
-          </div>
+          <Header/>
 
           <div className={styles.portfolioContent}>
             {/* User portfolios and related action section */}

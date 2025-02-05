@@ -5,6 +5,7 @@ import { Select,Option } from '@mui/joy';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 import Sidebar from 'components/Sidebar';
+import Header from 'components/Header';
 function PersonalDetails(props) {
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
@@ -13,28 +14,8 @@ function PersonalDetails(props) {
 
         <div className={styles.portfolioSection}>
           {/* Portfolio Section: Displays user's portfolios and search functionality */}
-
-          <div className={styles.searchToolbox}>
-            {/* Search and quick tools */}
-
-            <div className={styles.row5}>
-              <img
-                className={styles.image2}
-                src={'/assets/horizontal_logo.png'}
-                alt="alt text"
-              />
-
-              <button className={styles.block4}>
-                {/* TODO */}
-                <img
-                  className={styles.searchIcon}
-                  src={'/assets/search_icon.svg'}
-                  alt="alt text"
-                />
-                <button className={styles.searchBtn}>Search</button>
-              </button>
-            </div>
-          </div>
+          <Header/>
+          
 
           <p className={styles.portfolioTitle}>Personal Details</p>
 

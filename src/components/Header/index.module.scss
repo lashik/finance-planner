@@ -1,0 +1,54 @@
+@use "../utils" as *;
+@use "../global" as *;
+
+
+
+.searchToolbox {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(0 102 102);
+  border-radius: 16px;
+}
+
+.row5 {
+  display: flex;
+  align-items: center;
+  column-gap: 0;
+  margin: 24px;
+
+  @include xs {
+    position: relative;
+    margin: 24px 16px;
+  }
+
+  @include tn {
+    margin: 24px 8px;
+  }
+}
+
+.image2 {
+  width: 121px;
+  min-width: 0;
+  object-fit: cover;
+}
+
+.block4 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 12px;
+  min-width: 208px;
+  background-color: rgb(255 255 255);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+.searchIcon {
+  width: 20px;
+}
+
+.searchBtn {
+  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
+  color: rgb(0 0 0 / 60%);
+  letter-spacing: -0.28001px;
+}

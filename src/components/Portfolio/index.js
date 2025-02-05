@@ -4,7 +4,7 @@ import cn from 'classnames';
 import { Select, Option} from '@mui/joy';
 import {RadioGroup, Radio} from "@heroui/react";
 import styles from './index.module.scss';
-
+import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 function Portfolio(props) {
   return (
@@ -15,27 +15,7 @@ function Portfolio(props) {
         <div className={styles.portfolioSection}>
           {/* Portfolio Section: Displays user's portfolios and search functionality */}
 
-          <div className={styles.searchToolbox}>
-            {/* Search and quick tools */}
-
-            <div className={styles.row5}>
-              <img
-                className={styles.image2}
-                src={'/assets/horizontal_logo.png'}
-                alt="alt text"
-              />
-
-              <button className={styles.block4}>
-                {/* TODO */}
-                <img
-                  className={styles.searchIcon}
-                  src={'/assets/search_icon.svg'}
-                  alt="alt text"
-                />
-                <button className={styles.searchBtn}>Search</button>
-              </button>
-            </div>
-          </div>
+          <Header/>
 
           <p className={styles.portfolioTitle}>My Portfolio</p>
 
