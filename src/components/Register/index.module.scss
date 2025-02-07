@@ -291,7 +291,7 @@ input {
 }
 .input-country,.input-dob{
   box-sizing: border-box;
-  width: 100px;
+  width: 90px;
   height: 41px;
   background: #FEFEFE;
   border: 1px solid #86DBDB;
@@ -301,7 +301,9 @@ input {
   bottom: 3px;
 }
 
-
+.input-dob{
+  margin-left: 10px;
+}
 .frame-31 {
   display: flex;
   flex-direction: row;

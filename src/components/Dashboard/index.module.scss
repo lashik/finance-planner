@@ -4,16 +4,17 @@
 .containerSection {
   display: flex;
   flex-direction: column;
-  background-color: rgb(216 216 216);
+  background-color: $main-bg-color;
   overflow: hidden;
+  width: 99.1vw;
 }
 
 .contentBlock {
   display: flex;
-  justify-content: space-between;
-  column-gap: 32px;
+  justify-content: start;
+  column-gap: 4%;
  // margin: 0 26px 0 0;
-  max-width: 1414px;
+  width: 100%;
 
   @include xl {
     flex-direction: column;
@@ -31,347 +32,13 @@
   }
 }
 
-.headerSection {
-  display: flex;
-  flex-direction: column;
-  width: 256px;
-  min-width: 0;
-  background-color: rgb(0 154 154);
-  outline-offset: 0;
-  border-radius: 16px;
-  outline: rgb(255 255 255) solid 0px;
-
-  @include xl {
-    position: relative;
-    width: 100%;
-    min-width: unset;
-  }
-}
-
-.headerContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
-  margin: 0 0 472px;
-
-  @include md {
-    position: relative;
-    margin: 0 0 150px;
-  }
-
-  @include xs {
-    margin: 0 0 80px;
-  }
-
-  @include tn {
-    margin: 0 0 50px;
-  }
-}
-
-.brandingBlock {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgb(0 128 128);
-  border-radius: 0 0 16px 16px;
-}
-
-.brandingRow {
-  display: flex;
-  column-gap: 27px;
-  margin: 24px;
-
-  @include xs {
-    position: relative;
-    column-gap: 16px;
-    margin: 24px 16px;
-  }
-
-  @include tn {
-    column-gap: 8px;
-    margin: 24px 8px;
-  }
-}
-
-.companyLogo {
-  width: 24px;
-  object-fit: cover;
-}
-
-.siteTitle {
-  margin: 1px 0 3px;
-  width: 114px;
-  font: 700 16px/1.25 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.32px;
-}
-
-.secondaryLogo {
-  margin: 4px 0;
-  width: 16px;
-  object-fit: cover;
-}
-
-.navigationBar {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0;
-  width: 208px;
-  max-width: 85%;
-  height: 100vh;
-}
-
-.mainNavSection {
-  display: flex;
-  flex-direction: column;
-  row-gap: 18px;
-  margin: 0 12px;
-
-  @include tn {
-    position: relative;
-    margin: 0 8px;
-  }
-}
-
-.navTitle {
-  display: flex;
-  align-items: center;
-  font: 500 12px/1 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.navItem {
-  display: flex;
-  column-gap: 12px;
-
-  @include tn {
-    column-gap: 8px;
-  }
-}
-
-.navIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.scheduleLink {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.portfolioNavItem {
-  display: flex;
-  column-gap: 12px;
-  margin: 28px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 28px 8px 0;
-  }
-}
-
-.portfolioIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.portfolioLink {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.incomeNavBlock {
-  display: flex;
-  flex-direction: column;
-  margin: 18px 0 0;
-  background-color: rgb(0 102 102);
-  border-radius: 8px;
-}
-
-.incomeNavItem {
-  display: flex;
-  column-gap: 12px;
-  margin: 10px 12px;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 10px 8px;
-  }
-}
-
-.incomeIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.incomeLink {
-  width: 124px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.settingsIcon {
-  margin: 2px 0;
-  width: 16px;
-  object-fit: cover;
-}
-
-.earningsSection {
-  display: flex;
-  align-items: center;
-  column-gap: 11px;
-  margin: 12px 0 0 23px;
-
-  @include xs {
-    position: relative;
-    margin: 12px 0 0 16px;
-  }
-
-  @include tn {
-    column-gap: 8px;
-    margin: 12px 0 0 8px;
-  }
-}
-
-.divider {
-  width: 2px;
-  height: 140px;
-  min-height: 140px;
-  background-color: rgb(0 102 102);
-}
-
-.earningsInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 0;
-  width: 172px;
-  min-width: 0;
-}
-
-.earningsText {
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-}
-
-.refundsText {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0 0;
-  width: 100%;
-  max-width: 100%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-align: center;
-  background-color: rgb(0 102 102);
-  padding: 8px 12px;
-  border-radius: 8px;
-  letter-spacing: -0.24px;
-}
-
-.declinesText {
-  margin: 12px 0 0;
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-}
-
-.payoutsText {
-  margin: 20px 0 0;
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-}
-
-.settingsArticle {
-  display: flex;
-  align-items: center;
-  margin: 40px 12px 0;
-  font: 500 12px/1 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-
-  @include tn {
-    position: relative;
-    margin: 40px 8px 0;
-  }
-}
-
-.notificationNavItem {
-  display: flex;
-  column-gap: 12px;
-  margin: 18px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 18px 8px 0;
-  }
-}
-
-.notificationIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.notificationLink {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.settingsNavItem {
-  display: flex;
-  column-gap: 12px;
-  margin: 28px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 28px 8px 0;
-  }
-}
-
-.settingsIcon1 {
-  width: 20px;
-  object-fit: cover;
-}
-
-.settingsLink {
-  width: 124px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.extraSettingsIcon {
-  margin: 2px 0;
-  width: 16px;
-  object-fit: cover;
-}
 
 .mainContentSection {
   display: flex;
   flex-direction: column;
   row-gap: 63px;
-  margin: 0 0 100px;
-  width: 100%;
+  // margin: 0 0 100px;
+  width: 77%;
   min-width: 0;
   height: fit-content;
   @include xl {
@@ -386,64 +53,15 @@
   }
 }
 
-.searchBlock {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(0 128 128);
-  border-radius: 16px;
-}
-
-.searchRow {
-  display: flex;
-  align-items: center;
-  column-gap: 0;
-  margin: 24px;
-  
-  @include xs {
-    position: relative;
-    margin: 24px 16px;
-  }
-
-  @include tn {
-    margin: 24px 8px;
-  }
-}
-
-.searchLogo {
-  width: 121px;
-  min-width: 0;
-  object-fit: cover;
-}
-
-.searchBtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 12px;
-  min-width: 208px;
-  background-color: rgb(255 255 255);
-  padding: 10px 12px;
-  border-radius: 8px;
-}
-
-.searchIcon {
-  width: 20px;
-}
-
-.searchText {
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0 / 60%);
-  letter-spacing: -0.28001px;
-  margin-right: 35%;
-}
 
 .portfolioContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: start;
+  
   row-gap: 18px;
-  width: 355px;
-  max-width: 85%;
+  width: auto;
+  max-width: auto;
 }
 
 .portfolioTitle {
@@ -464,10 +82,14 @@
 
 .portfolioItem {
   display: flex;
-  justify-content: space-between;
-  column-gap: 32px;
-  width: 100%;
-
+  justify-content:start ;
+  flex-direction: row;
+  column-gap: none;
+  width: auto;
+  height: auto;
+  background-color:white;
+  box-shadow: $shadow;
+  border-radius: 3%;
   @include xs {
     column-gap: 16px;
   }
@@ -476,7 +98,34 @@
     column-gap: 8px;
   }
 }
+.incomeBlock, .expenseBlock ,.chartBlock{
+  display: flex;
+  flex-direction: column;
+  justify-content:start;
+  width: 500px;
+  height: 100%;
+  align-items: center;
+  background-color: white;
+  
+  border-right: 1px black solid;
+}
+.chartBlock{
+  border-right: none;
+  height: auto;
+  border-top-right-radius: 3%;
+  border-bottom-right-radius:3% ;
+}
+.incomeBlock{
+  border-top-left-radius: 3%;
+  border-bottom-left-radius: 3%;
+}
 
+.incomeChart{
+  display: flex;
+  flex-direction: row;
+  align-items: center;  
+  justify-content: center;
+}
 .portfolioImage {
   width: 108px;
   min-width: 0;
@@ -550,4 +199,36 @@
   margin: 0 0 0 auto;
   width: 24px;
   object-fit: cover;
+}
+.incomeAmtBrk{
+  border-top: 1px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+   
+}
+.incomeTitle{
+  width: 80%;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+div[id='investment'].incomeTitle{
+  width: 80%;
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.expenseAmount{
+  width: 100%;
+  border-top: 1px solid black;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }

@@ -97,7 +97,7 @@
 .mainNavSection {
   display: flex;
   flex-direction: column;
-  row-gap: 18px;
+  row-gap: 8px;
   margin: 0 12px;
 
   @include tn {
@@ -122,6 +122,7 @@
   @include tn {
     column-gap: 8px;
   }
+  
 }
 
 .navIcon {
@@ -134,17 +135,27 @@
   font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
   color: rgb(229 227 227);
   letter-spacing: -0.28001px;
+  text-decoration: none;
+  &:hover{
+    color: white;
+  }
 }
 
 .portfolioNavItem {
   display: flex;
   column-gap: 12px;
-  margin: 28px 12px 0;
-
+  margin: 8px 0px 0;
+  border-radius: 3px;
+  align-items: center;
+  width: 90%;
+  padding: 2%;
   @include tn {
     position: relative;
     column-gap: 8px;
     margin: 28px 8px 0;
+  }
+  &:hover{
+    background-color: rgb(0 102 102);
   }
 }
 
@@ -152,12 +163,17 @@
   width: 20px;
   object-fit: cover;
 }
+.Icon {
+  width: 20px;
+  object-fit: cover;
+}
 
 .portfolioLink {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
+  text-decoration: none; /* Remove underline */
+  color: white;
+  &:hover{
+    color: white;
+  }
 }
 
 .incomeNavBlock {

@@ -4,19 +4,19 @@
 .mainContainer {
   display: flex;
   flex-direction: column;
-  background-color: #EEF2F5;
+  background-color: $main-bg-color;
   
-  width: 100%;
+  width: 99.1vw;
   height: 100%;
 }
 
 .row {
   display: flex;
-  justify-content: space-between;
-  column-gap: 32px;
+  justify-content: start;
+  column-gap: 4%;
   //margin: 0 26px 0 0;
-  max-width: 1414px;
-  
+  width: 100%;
+  overflow-x: hidden;
   @include xl {
     flex-direction: column;
     align-items: center;
@@ -353,7 +353,7 @@
   flex-direction: column;
   row-gap: 63px;
   margin: 0 0 79px;
-  width: 1119px;
+  width: 80%;
   min-width: 0;
 
   @include xl {
@@ -440,11 +440,12 @@
 }
 
 .profileGrid {
-  display: column;
-  align-content: center;
-  column-gap: 100px;
-  width: 100%;
-  
+  display: grid;
+  //align-content: center;
+  justify-content: start;
+  column-gap: 10px;
+  width: 85%;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); 
   
 
   @include md {
@@ -468,6 +469,7 @@
   grid-column: span 1;
   background-color: rgb(255 255 255);
   border-radius: 1px;
+  box-shadow: $shadow;
   //
 }
 
