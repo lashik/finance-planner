@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
+import { get } from '@vercel/edge-config';
 import { useState, useEffect } from 'react';
 function Header(props) {
   const [users, setUsers] = useState([]);
@@ -10,7 +11,7 @@ function Header(props) {
 
   useEffect(() => {
     // Fetch users from the db.json file
-    axios.get('http://localhost:3001/users')
+    get('users')
       .then(response => {
         setUsers(response.data);
         if (response.data.length > 0) {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import axios from 'axios';
-
+import { get,set } from '@vercel/edge-config';
 function Register(props) {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(true);
@@ -18,7 +18,7 @@ function Register(props) {
     number: ''
   });
   useEffect(() => {
-    axios.get('http://localhost:3001/users')
+    get('users')
       .then(response => setUsers(response.data))
       .catch(error => console.error(error));
   }, []);
@@ -27,48 +27,20 @@ function Register(props) {
     setFormData({ ...formData, [name]: value });
   };
   const handleSubmit = () => {
-    // Generate a unique 5-digit ID
     const uniqueId = Math.floor(10000 + Math.random() * 90000);
-    // if (!formData.name || !formData.email || !formData.number) {
-    //   alert("Please fill out all required fields.");
-    //   return;
-    // }
-    // // Additional email format validation
-    // if (!/\S+@\S+\.\S+/.test(formData.email)) {
-    //   alert("Please enter a valid email address.");
-    //   return;
-    // }
-
-    // const dataToSave = {
-    //   id: uniqueId,
-    //   ...formData
-    // };
-
-    // // Write data to a JSON file (simulated here with localStorage)
-    // localStorage.setItem(uniqueId, JSON.stringify(dataToSave));
-    // axios.post('http://localhost:3001/users', formData)
-    //   .then(response => setUsers([...users, response.data]))
-    //   .catch(error => console.error(error));
-    // console.log(dataToSave)
-    // // Create an object to store the data
-
-
-    // navigate("/Dashboard");
-
-    // Route to the Forms page
     if (isRegister) {
-      // Registration logic
       const uniqueId = Math.floor(10000 + Math.random() * 90000);
       const dataToSave = {
         id: uniqueId,
         ...formData
       };
-      localStorage.setItem(uniqueId, JSON.stringify(dataToSave));
-      axios.post('http://localhost:3001/users', formData)
-        .then(response => setUsers([...users, response.data]))
+      const updatedUsers = [...users, dataToSave];
+      set('users', updatedUsers)
+        .then(() => {
+          setUsers(updatedUsers);
+          navigate("/Dashboard");
+        })
         .catch(error => console.error(error));
-      console.log(dataToSave);
-      navigate("/Dashboard");
     } else {
       // Login logic
       const user = users.find(user => user.userId === formData.userId && user.password === formData.password);

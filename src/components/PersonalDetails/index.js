@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { Select,Option } from '@mui/joy';
 import styles from './index.module.scss';
-
+import { get } from '@vercel/edge-config';
 import axios from 'axios';
 import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 import { useNavigate } from 'react-router-dom';
 import { extendTheme,CssVarsProvider } from '@mui/joy/styles';
+import { get,set } from '@vercel/edge-config';
 function PersonalDetails(props) {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
@@ -39,7 +40,7 @@ function PersonalDetails(props) {
   });
   
   useEffect(() => {
-    axios.get('http://localhost:3001/users')
+    get('users')
       .then(response => {
         setUsers(response.data);
         if (response.data.length > 0) {
@@ -62,12 +63,13 @@ function PersonalDetails(props) {
       id: uniqueId,
       ...formData
     };
-    localStorage.setItem(uniqueId, JSON.stringify(dataToSave));
-    axios.post('http://localhost:3001/users', formData)
-      .then(response => setUsers([...users, response.data]))
+    const updatedUsers = [...users, dataToSave];
+    set('users', updatedUsers)
+      .then(() => {
+        setUsers(updatedUsers);
+        navigate("/Dashboard");
+      })
       .catch(error => console.error(error));
-    console.log(dataToSave);
-    navigate("/Dashboard");
   };
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
