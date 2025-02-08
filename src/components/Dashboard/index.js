@@ -70,7 +70,7 @@ function Dashboard(props) {
                 <div className={styles.expenseTitle}>
                 <ChartContainer
                     series={[{ data: [2, 5, 3,5,8,9],label: 'Expenses', type: 'bar'}]}
-                    {...chartSetting}
+                    {...chartSetting} 
                   >
                     <BarPlot/>
                     </ChartContainer>
@@ -104,6 +104,13 @@ function Dashboard(props) {
                   ]}
                   width={400}
                   height={200}
+                  sx={{
+                    fontFamily: "Inter",
+                    fontStyle: "normal",
+                    fontWeight: 600,
+                    fontSize: "12.4px",
+                    lineHeight: "15px",
+                  }}
                 />
               </div>
             </div>

@@ -288,6 +288,10 @@ input {
   color: black;
   right: 4px;
   bottom: 3px;
+  font-family: 'Inter'; 
+  font-style: normal; 
+  font-weight: 600; 
+  font-size: 14px;
 }
 .input-country,.input-dob{
   box-sizing: border-box;
@@ -299,6 +303,10 @@ input {
   color: black;
   right: 6px;
   bottom: 3px;
+  font-family: 'Inter'; 
+  font-style: normal; 
+  font-weight: 600; 
+  font-size: 14px;
 }
 
 .input-dob{
@@ -366,7 +374,10 @@ input {
   gap: 8px;
   width: max-content;
   height: 40px;
-  
+  font-family: 'Inter'; 
+  font-style: normal; 
+  font-weight: 600; 
+  font-size: 12.4px;
   top: 50%;
   background: #63acac;
   border-radius: 100px;
