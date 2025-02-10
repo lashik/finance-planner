@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import axios from 'axios';
-import { get,set } from '@vercel/edge-config';
+import { supabase } from 'supabaseClient';
+import { setGlobalVar } from 'db';
 function Register(props) {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(true);
@@ -15,42 +16,72 @@ function Register(props) {
     dob: '',
     country: '',
     email: '',
-    number: ''
+    number: '',
+    password: '' // Ensure password is included if needed
   });
+
+  // Fetch users from Supabase
   useEffect(() => {
-    get('users')
-      .then(response => setUsers(response.data))
-      .catch(error => console.error(error));
+    const fetchUsers = async () => {
+      const { data, error } = await supabase.from('users').select('*');
+
+      if (error) {
+        console.error("Error fetching users:", error.message);
+      } else {
+        setUsers(data);
+      }
+    };
+
+    fetchUsers();
   }, []);
+
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const handleSubmit = () => {
-    const uniqueId = Math.floor(10000 + Math.random() * 90000);
+
+  // Handle registration or login
+  const handleSubmit = async () => {
     if (isRegister) {
-      const uniqueId = Math.floor(10000 + Math.random() * 90000);
-      const dataToSave = {
-        id: uniqueId,
-        ...formData
-      };
-      const updatedUsers = [...users, dataToSave];
-      set('users', updatedUsers)
-        .then(() => {
-          setUsers(updatedUsers);
-          navigate("/Dashboard");
-        })
-        .catch(error => console.error(error));
+      // **Register New User in Supabase**
+      const { data, error } = await supabase.from("Users").insert([
+        {
+          name: formData.name,
+          dob: formData.dob,
+          country: formData.country,
+          email: formData.email,
+          number: formData.number,
+          
+          //createdAt: new Date().toISOString()
+        }
+      ]);
+
+      if (error) {
+        alert("Error: " + error.message);
+      } else {
+        alert("User registered successfully");
+        setGlobalVar(formData.email);
+        navigate("/Dashboard");
+      }
     } else {
-      // Login logic
-      const user = users.find(user => user.userId === formData.userId && user.password === formData.password);
-      if (user) {
+      // **Login: Check user credentials**
+      const { data, error } = await supabase
+        .from("Users")
+        .select("*")
+        .eq("email", formData.userId)
+        .eq("password", formData.password);
+
+      if (error) {
+        alert("Error: " + error.message);
+      } else if (data.length > 0) {
+        alert("Login successful!");
+        setGlobalVar(formData.userId);
         navigate("/Dashboard");
       } else {
-        alert("Invalid user ID or password");
+        alert("Invalid credentials");
       }
     }
-
   };
   return (
     <section

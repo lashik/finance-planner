@@ -1,85 +1,84 @@
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { Select,Option } from '@mui/joy';
+import { Select, Option } from '@mui/joy';
 import styles from './index.module.scss';
-import { get } from '@vercel/edge-config';
-import axios from 'axios';
+import { supabase } from 'supabaseClient';
 import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 import { useNavigate } from 'react-router-dom';
-import { extendTheme,CssVarsProvider } from '@mui/joy/styles';
-import { get,set } from '@vercel/edge-config';
+import { globalVar } from 'db';
+
 function PersonalDetails(props) {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
-    name: '',
-    dob: '',
-    country: '',
-    email: '',
-    number: '',
-    occupation: '',
-    maritalStatus: '',
-    gender: '',
-    dependants: '',
-    professionalIncome: '',
-    otherIncome: '',
-    insurancePremium: '',
-    ongoingSavings: '',
-    loan: '',
-    houseRent: '',
-    electricityBills: '',
-    telephoneBills: '',
-    grocery: '',
-    medicine: '',
-    educationFees: '',
-    houseHelp: '',
-    socialCause: '',
-    entertainment: ''
+    occupation: "",
+    maritalStatus: "",
+    gender: "",
+    dependants: "",
+    professionalIncome: "",
+    otherIncome: "",
+    insurancePremium: "",
+    ongoingSavings: "",
+    loan: "",
+    houseRent: "",
+    electricityBills: "",
+    telephoneBills: "",
+    grocery: "",
+    medicine: "",
+    educationFees: "",
+    houseHelp: "",
+    socialCause: "",
+    entertainment: "",
   });
-  
+
+  // Fetch users from Supabase on component mount
   useEffect(() => {
-    get('users')
-      .then(response => {
-        setUsers(response.data);
-        if (response.data.length > 0) {
-          // Get the last user created
-          const lastUser = response.data[response.data.length - 1];
-          setFormData(lastUser);
-        }
-      })
-      .catch(error => console.error(error));
+    const fetchUsers = async () => {
+      const { data, error } = await supabase.from("Users").select("*").eq("email", globalVar).single();
+
+      if (error) {
+        console.error("Error fetching users:", error.message);
+      } else if (data) {
+        
+        setFormData(data); // Set formData to last user
+      }
+    };
+
+    fetchUsers();
   }, []);
 
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = () => {
-    const uniqueId = Math.floor(10000 + Math.random() * 90000);
-    const dataToSave = {
-      id: uniqueId,
-      ...formData
-    };
-    const updatedUsers = [...users, dataToSave];
-    set('users', updatedUsers)
-      .then(() => {
-        setUsers(updatedUsers);
-        navigate("/Dashboard");
-      })
-      .catch(error => console.error(error));
+  // Handle form submission
+  const handleSubmit = async () => {
+    const { data, error } = await supabase
+      .from("users")
+      .update(formData)
+      .eq("email", globalVar);
+
+    if (error) {
+      alert("Error updating user details. Please try again.");
+      console.error("Update error:", error.message);
+    } else {
+      alert("User details updated successfully!");
+      navigate("/Dashboard");
+    }
   };
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
       <div className={styles.row}>
-        <Sidebar/>
+        <Sidebar />
 
         <div className={styles.portfolioSection}>
           {/* Portfolio Section: Displays user's portfolios and search functionality */}
-          <Header/>
-          
+          <Header />
+
 
           <p className={styles.portfolioTitle}>Personal Details</p>
 
@@ -92,64 +91,64 @@ function PersonalDetails(props) {
 
                 <div className={styles.row7}>
                   <p className={styles.occupationLabel}>Occupation</p>
-                  
-                  <Select 
-                  className={`${styles.dropdown} ${styles.select}`} 
-                  placeholder="Select an Option" 
-                  size='sm'
-                  value={formData.occupation}
-                  onChange={(e, value) => setFormData({ ...formData, occupation: value  })} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>
-                    
+
+                  <Select
+                    className={`${styles.dropdown} ${styles.select}`}
+                    placeholder="Select an Option"
+                    size='sm'
+                    value={formData.occupation}
+                    onChange={(e, value) => setFormData({ ...formData, occupation: value })} sx={{
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>
+
                     <Option value="Service" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Service</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Service</Option>
                     <Option value="Business" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Business</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Business</Option>
                     <Option value="Student" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Student</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Student</Option>
                     <Option value="Retired" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Retired</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Retired</Option>
                     <Option value="House maker" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>House maker</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>House maker</Option>
                     <Option value="Professional" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Professional</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Professional</Option>
                   </Select>
-                  
+
                 </div>
 
                 <div className={styles.row8}>
@@ -158,49 +157,49 @@ function PersonalDetails(props) {
                     placeholder="Select an Option"
                     size='sm'
                     value={formData.maritalStatus}
-                    onChange={(e, value) => setFormData({ ...formData, maritalStatus: value  })} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>
-                    
+                    onChange={(e, value) => setFormData({ ...formData, maritalStatus: value })} sx={{
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>
+
                     <Option value="Single" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Single</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Single</Option>
                     <Option value="Married" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Married</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Married</Option>
                     <Option value="Divorcee" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Divorcee</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Divorcee</Option>
                     <Option value="Separated" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Separated</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Separated</Option>
                     <Option value="Widower" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Widower</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Widower</Option>
                   </Select>
                 </div>
 
@@ -210,87 +209,87 @@ function PersonalDetails(props) {
                     placeholder="Select an Option"
                     size='sm'
                     value={formData.gender}
-                    onChange={(e, value) => setFormData({ ...formData, gender: value  })} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>
-                    
+                    onChange={(e, value) => setFormData({ ...formData, gender: value })} sx={{
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>
+
                     <Option value="Male" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Male</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Male</Option>
                     <Option value="Female" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Female</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Female</Option>
                     <Option value="Choose" not to Say className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>Choose not to Say</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>Choose not to Say</Option>
                   </Select>
                 </div>
 
                 <div className={styles.row8}>
                   <p className={styles.dependantsLabel}>Dependants</p>
-                  <Select  className={`${styles.dropdown} ${styles.select}`}
+                  <Select className={`${styles.dropdown} ${styles.select}`}
                     placeholder="Select an Option"
                     size='sm'
                     value={formData.dependants}
-                    onChange={(e, value) => setFormData({ ...formData, dependants: value  })} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>
-                    
+                    onChange={(e, value) => setFormData({ ...formData, dependants: value })} sx={{
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>
+
                     <Option value="0" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>0</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>0</Option>
                     <Option value="1" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>1</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>1</Option>
                     <Option value="2" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>2</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>2</Option>
                     <Option value="3" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>3</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>3</Option>
                     <Option value="4+" className={styles.dropdown_item} sx={{
-                    fontFamily: "Inter",
-                    fontStyle: "normal",
-                    fontWeight: 600,
-                    fontSize: "12.4px",
-                    lineHeight: "15px",
-                  }}>4+</Option>
+                      fontFamily: "Inter",
+                      fontStyle: "normal",
+                      fontWeight: 600,
+                      fontSize: "12.4px",
+                      lineHeight: "15px",
+                    }}>4+</Option>
                   </Select>
                 </div>
               </div>
