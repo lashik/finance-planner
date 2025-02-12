@@ -43,6 +43,7 @@ function Register(props) {
 
   // Handle registration or login
   const handleSubmit = async () => {
+    console.log(window.screen.width);
     if (isRegister) {
       // **Register New User in Supabase**
       const { data, error } = await supabase.from("Users").insert([
