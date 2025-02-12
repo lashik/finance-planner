@@ -3,10 +3,10 @@
 
 .mainContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: wrap;
   background-color: $main-bg-color;
   
-  width: 99.1vw;
+  width: 100%;
   height: 100%;
 }
 
@@ -15,12 +15,12 @@
   justify-content: start;
   column-gap: 4%;
   //margin: 0 26px 0 0;
-  width: 100%;
+  width: 100vw;
   overflow-x: hidden;
   @include xl {
     flex-direction: column;
     align-items: center;
-    gap: 32px;
+    //gap: 32px;
   }
 
   @include xs {
@@ -33,22 +33,7 @@
   }
 }
 
-.block {
-  display: flex;
-  flex-direction: column;
-  width: 256px;
-  min-width: 0;
-  background-color: rgb(0 154 154);
-  outline-offset: 0;
-  border-radius: 16px;
-  outline: rgb(217 217 217) solid 0px;
-  max-height: 100vh;
-  @include xl {
-    position: relative;
-    width: 100%;
-    min-width: unset;
-  }
-}
+
 
 .topSection {
   display: flex;
@@ -352,14 +337,14 @@
   display: flex;
   flex-direction: column;
   row-gap: 63px;
-  margin: 0 0 79px;
+  left: 18%;
   width: 80%;
   min-width: 0;
-
+  position: absolute;
   @include xl {
-    position: relative;
+    
     margin: 0;
-    width: 100%;
+    width: 80%;
     min-width: unset;
   }
 
@@ -443,15 +428,18 @@
   display: grid;
   //align-content: center;
   justify-content: start;
-  column-gap: 10px;
-  width: 85%;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); 
+  // column-gap: 10px;
+  width: 100%;
+  gap:15px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
   
 
   @include md {
-    column-gap: 32px;
+    column-gap: 5px;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    
   }
-
+ 
   @include xs {
     column-gap: 16px;
     grid-template-columns: repeat(1, minmax(0, 1fr));
@@ -463,7 +451,8 @@
   flex-direction: column;
   grid-row: span 1;
   margin-top: 10px;
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   height: fit-content;
   overflow: hidden;
   grid-column: span 1;
@@ -471,6 +460,11 @@
   border-radius: 1px;
   box-shadow: $shadow;
   //
+  @include md {
+    
+    width: 100%;
+    min-width: unset;
+  }
 }
 
 .row6 {
@@ -552,7 +546,7 @@
    font-style: normal; 
    font-weight: 600; 
    font-size: 12.4px; 
-   line-height: 15px;
+   line-height: 15px; 
   
    color: #6f7482;
 }
