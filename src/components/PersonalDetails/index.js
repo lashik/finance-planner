@@ -36,7 +36,7 @@ function PersonalDetails(props) {
   // Fetch users from Supabase on component mount
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data, error } = await supabase.from("Users").select("*").eq("email", globalVar).single();
+      const { data, error } = await supabase.from("users").select("*").eq("email", globalVar).single();
 
       if (error) {
         console.error("Error fetching users:", error.message);

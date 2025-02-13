@@ -7,7 +7,9 @@ import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 import { BarChart , BarPlot, PieChart } from '@mui/x-charts';
 import { ChartContainer } from '@mui/x-charts';
-
+import { supabase } from 'supabaseClient';
+import { useEffect } from 'react';
+import { globalVar, setGlobalVar } from 'db';
 const chartSetting = {
   xAxis: [
     {
@@ -20,6 +22,26 @@ const chartSetting = {
   height: 400,
 };
 function Dashboard(props) {
+  const [valueFilled, setValueFilled] = React.useState(false);
+  function handleNav(){
+    window.location.href = "/Form";
+  }
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const { data, error } = await supabase.from('users').select('*').eq('email', globalVar);
+      if (error) {
+        console.error(error);
+      }
+      else if (data[0].setValue==false){
+        setValueFilled(false);
+      }
+      else{
+        setValueFilled(true);
+      }
+    }
+  }
+, []);
+        
   return (
     
     
@@ -34,7 +56,7 @@ function Dashboard(props) {
         <section className={styles.mainContentSection}>
           {/* Main section for portfolio and search */}
           <Header />
-
+          { valueFilled ? (
           <div className={styles.portfolioContent}>
             {/* User portfolios and related action section */}
             <article className={styles.portfolioTitle}>My Portfolio’s</article>
@@ -115,6 +137,12 @@ function Dashboard(props) {
               </div>
             </div>
           </div>
+          ):(
+            <div className={styles.portfolioContent} onClick={handleNav}>
+              First time? Fill your Income and expenses to get started
+            </div>
+          )
+}
         </section>
       </div>
     </section>

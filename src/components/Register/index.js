@@ -10,6 +10,7 @@ import { setGlobalVar } from 'db';
 function Register(props) {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(true);
+  const [passwordSet, setPasswordSet] = useState(false);
   const [users, setUsers] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
@@ -17,7 +18,8 @@ function Register(props) {
     country: '',
     email: '',
     number: '',
-    password: '' // Ensure password is included if needed
+    password: '',
+    passwF: '' // Ensure password is included if needed
   });
 
   // Fetch users from Supabase
@@ -43,27 +45,35 @@ function Register(props) {
 
   // Handle registration or login
   const handleSubmit = async () => {
-    console.log(window.screen.width);
-    if (isRegister) {
-      // **Register New User in Supabase**
-      const { data, error } = await supabase.from("Users").insert([
-        {
-          name: formData.name,
-          dob: formData.dob,
-          country: formData.country,
-          email: formData.email,
-          number: formData.number,
-          
-          //createdAt: new Date().toISOString()
-        }
-      ]);
 
-      if (error) {
-        alert("Error: " + error.message);
-      } else {
-        alert("User registered successfully");
-        setGlobalVar(formData.email);
-        navigate("/Dashboard");
+    if (isRegister) {
+      if (!passwordSet) {
+        setPasswordSet(true);
+        return
+      } else if (formData.password !== formData.passwF) {
+        alert("Passwords do not match");
+        return;
+      }
+      else {
+        const { data, error } = await supabase.from("Users").insert([
+          {
+            name: formData.name,
+            dob: formData.dob,
+            country: formData.country,
+            email: formData.email,
+            number: formData.number,
+            password: formData.password,
+            //createdAt: new Date().toISOString()
+          }
+        ]);
+
+        if (error) {
+          alert("Error: " + error.message);
+        } else {
+          alert("User registered successfully");
+          setGlobalVar(formData.email);
+          navigate("/Dashboard");
+        }
       }
     } else {
       // **Login: Check user credentials**
@@ -77,6 +87,7 @@ function Register(props) {
         alert("Error: " + error.message);
       } else if (data.length > 0) {
         alert("Login successful!");
+        console.log(data[0].email);
         setGlobalVar(formData.userId);
         navigate("/Dashboard");
       } else {
@@ -119,29 +130,43 @@ function Register(props) {
             {/* Detailed info cards */}
 
             {isRegister ? (
-              <div className={styles['info-card']}>
-                <div className={styles['name-section']}>
-                  <span className={styles['label-name']}>Name:</span>
-                  <input type="text" name='name' className={styles['input-name']} value={formData.name} onChange={handleChange} />
-                </div>
 
-                <div className={styles['dob-country-section']}>
-                  <span className={styles['label-dob']}>DOB:</span>
-                  <input type="date" name='dob' className={styles['input-dob']} value={formData.dob} onChange={handleChange} placeholder=" " />
-                  <span className={styles['label-country']}>Country:</span>
-                  <input type="text" name='country' className={styles['input-country']} value={formData.country} onChange={handleChange} />
-                </div>
+              (passwordSet ? (
+                <div className={styles['info-card']} >
+                  <div className={styles['name-section']}>
+                    <span className={styles['label-name']}>Name:</span>
+                    <input type="text" name='name' className={styles['input-name']} value={formData.name} onChange={handleChange} />
+                  </div>
 
-                <div className={styles['email-section']}>
-                  <span className={styles['label-email']}>Email- ID</span>
-                  <input type="email" name='email' className={styles['input-email']} value={formData.email} onChange={handleChange} />
-                </div>
+                  <div className={styles['dob-country-section']}>
+                    <span className={styles['label-dob']}>DOB:</span>
+                    <input type="date" name='dob' className={styles['input-dob']} value={formData.dob} onChange={handleChange} placeholder=" " />
+                    <span className={styles['label-country']}>Country:</span>
+                    <input type="text" name='country' className={styles['input-country']} value={formData.country} onChange={handleChange} />
+                  </div>
 
-                <div className={styles['number-section']}>
-                  <span className={styles['label-number']}>Number:</span>
-                  <input type="tel" name='number' className={styles['input-number']} value={formData.number} onChange={handleChange} />
+                  <div className={styles['email-section']}>
+                    <span className={styles['label-email']}>Email- ID</span>
+                    <input type="email" name='email' className={styles['input-email']} value={formData.email} onChange={handleChange} />
+                  </div>
+
+                  <div className={styles['number-section']}>
+                    <span className={styles['label-number']}>Number:</span>
+                    <input type="tel" name='number' className={styles['input-number']} value={formData.number} onChange={handleChange} />
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className={styles['info-card']} >
+                  <div className={styles['name-section']}>
+                    <span className={styles['label-name']}>New Password:</span>
+                    <input type="password" name='password' className={styles['input-name']} value={formData.password} onChange={handleChange} />
+                  </div>
+                  <div className={styles['email-section']}>
+                    <span className={styles['label-email']}>Confirm Password:</span>
+                    <input type="password" name='passwF' className={styles['input-email']} value={formData.passwF} onChange={handleChange} />
+                  </div>
+                </div>
+              ))
             ) : (
               <div className={styles['info-card']}>
                 <div className={styles['name-section']}>
@@ -164,7 +189,7 @@ function Register(props) {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 
