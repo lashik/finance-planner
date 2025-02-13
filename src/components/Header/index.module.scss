@@ -57,28 +57,103 @@
   color: rgb(0 0 0 / 60%);
   letter-spacing: -0.28001px;
 }
-.userIcon{
-  background-color: rgb(255 255 255);
-  color: rgb(0, 0, 0);
-  width: 30px;
-  height: 30px;
-  padding-bottom: 20px;
-  text-align:center;
-  text-anchor: middle;
-  size: 20px;
-  text-shadow: 0px 0px 0px rgb(0 0 0);
-  border-radius:100% ;
-}
+
+
 .settingsIcon {
   margin: 2px 0;
   width: 16px;
   object-fit: cover;
 }
+
 .settingsIcon1 {
   width: 20px;
   object-fit: cover;
 }
+
 .notificationIcon {
   width: 20px;
   object-fit: cover;
+}
+
+
+
+
+
+
+.userProfile {
+  position: relative;
+}
+
+.userIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  width: 200px;
+  background: #f1f1f1;
+
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  //overflow: hidden;
+  
+  /* Animation */
+  opacity: 1;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.dropdownMenu_active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdownMenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdownMenu ul li {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.dropdownMenu ul li:hover {
+  background: #333;
+}
+
+.dropdownMenu ul li a,
+.dropdownMenu ul li button {
+  text-decoration: none;
+  //text-decoration-thickness:6px ;
+  color: #333;
+  background: none;
+  border: none;
+  width: 100%;
+  font-weight:500;
+  text-align: left;
+  display: block;
+  padding: 0;
+  //font: inherit;
+  cursor: pointer;
 }
