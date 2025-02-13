@@ -661,4 +661,18 @@
     color: #333;
     outline: none;
   }
- 
+  
+ .submit{
+  padding: 10px;
+  gap: 8px;
+  width: max-content;
+  height: 40px;
+  font-family: 'Inter'; 
+  font-style: normal; 
+  font-weight: 600; 
+  font-size: 12.4px;
+  top: 50%;
+  background: #63acac;
+  border-radius: 100px;
+  align-items: center;
+ }

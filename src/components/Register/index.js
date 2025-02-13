@@ -19,7 +19,8 @@ function Register(props) {
     email: '',
     number: '',
     password: '',
-    passwF: '' // Ensure password is included if needed
+    passwF: '',
+    pdfilled:'false' // Ensure password is included if needed
   });
 
   // Fetch users from Supabase
@@ -55,7 +56,7 @@ function Register(props) {
         return;
       }
       else {
-        const { data, error } = await supabase.from("Users").insert([
+        const { data, error } = await supabase.from("users").insert([
           {
             name: formData.name,
             dob: formData.dob,
@@ -63,6 +64,7 @@ function Register(props) {
             email: formData.email,
             number: formData.number,
             password: formData.password,
+            pdfilled: formData.pdfilled,
             //createdAt: new Date().toISOString()
           }
         ]);
@@ -78,7 +80,7 @@ function Register(props) {
     } else {
       // **Login: Check user credentials**
       const { data, error } = await supabase
-        .from("Users")
+        .from("users")
         .select("*")
         .eq("email", formData.userId)
         .eq("password", formData.password);
@@ -131,7 +133,7 @@ function Register(props) {
 
             {isRegister ? (
 
-              (passwordSet ? (
+              (!passwordSet ? (
                 <div className={styles['info-card']} >
                   <div className={styles['name-section']}>
                     <span className={styles['label-name']}>Name:</span>
