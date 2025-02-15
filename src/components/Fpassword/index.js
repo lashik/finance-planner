@@ -29,8 +29,7 @@ function Fpassword(props) {
   };
   const handleOtp = async () => {
     const data = await supabase.from('users').select('*').eq('email', globalVar).single();
-    console.log(data.data.otp);
-    console.log(formData.otp);
+    
     if (data.data.otp === formData.otp) {
       setotpCorrect(true);
     }

@@ -19,7 +19,7 @@ function Header(props) {
 
 
   const handleLogout = async () => {
-    console.log("Logging out...");
+    
     setGlobalVar("Helooo  ");  // Clear user data
     setIsOpen(false);  // Close dropdown
     navigate("/", { replace: true });  // Redirect properly

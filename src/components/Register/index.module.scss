@@ -274,7 +274,15 @@ input {
   font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
   color: rgb(30 30 30);
 }
-
+.forgot{
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  color: rgb(30 30 30);
+}
 .icon-number {
   width: 309px;
   min-width: 0;

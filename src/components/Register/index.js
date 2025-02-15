@@ -39,7 +39,7 @@ function Register(props) {
   // Handle registration or login
   const handleSubmit = async () => {
     if (fpassword) {
-      console.log("in the reset function "+formData.userId);
+      
       const { error } = await supabase
         .from("users")
         .select("*")
@@ -68,7 +68,7 @@ function Register(props) {
         })
       .then((result) => {
         alert('Email sent successfully!');
-        console.log(otp);
+        
       }, (error) => {
         alert('Failed to send email, please try again.'+JSON.stringify(error, null, 2));
       });
@@ -208,7 +208,7 @@ function Register(props) {
                     <input type="password" name='password' className={styles['input-number']} value={formData.password} onChange={handleChange} />
                   </div>
                   <div className={styles['number-section']}>
-                    <button className={styles['label-number']} onClick={() => { setfPassword(true) }}>Forgot Password </button>
+                    <button className={styles['forgot']} onClick={() => { setfPassword(true) }}>Forgot Password </button>
                   </div>
                 </div>
               ) : (

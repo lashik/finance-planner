@@ -29,7 +29,7 @@ function Dashboard(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       const { data, error } = await supabase.from('users').select('*').eq('email', globalVar);
-      console.log(data);
+      
       if (error) {
         console.error(error);
       }
