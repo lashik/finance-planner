@@ -11,7 +11,7 @@ import { globalVar } from 'db';
 
 function PersonalDetails(props) {
   const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
+  
   const [formData, setFormData] = useState({
     occupation: "",
     maritalStatus: "",
@@ -57,7 +57,7 @@ function PersonalDetails(props) {
 
   // Handle form submission
   const handleSubmit = async () => {
-    const { data, error } = await supabase
+    const {  error } = await supabase
       .from("users")
       .update(formData)
       .eq("email", globalVar);

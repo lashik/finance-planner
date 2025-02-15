@@ -77,7 +77,7 @@ function Portfolio(props) {
 
   // Handle form submission
   const handleSubmit = async () => {
-    const { data, error } = await supabase
+    const {  error } = await supabase
       .from("users")
       .update(formData)
       .eq("email", globalVar);

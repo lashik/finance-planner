@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { Link } from 'react-router-dom';
+
 import styles from './index.module.scss';
 import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
-import { BarChart , BarPlot, PieChart } from '@mui/x-charts';
+import { BarPlot, PieChart } from '@mui/x-charts';
 import { ChartContainer } from '@mui/x-charts';
 import { supabase } from 'supabaseClient';
 import { useEffect } from 'react';
-import { globalVar, setGlobalVar } from 'db';
+import { globalVar } from 'db';
 const chartSetting = {
   xAxis: [
     {
@@ -29,17 +29,20 @@ function Dashboard(props) {
   useEffect(() => {
     const fetchUsers = async () => {
       const { data, error } = await supabase.from('users').select('*').eq('email', globalVar);
+      console.log(data);
       if (error) {
         console.error(error);
       }
-      else if (data[0].setValue==false){
+      else if (data[0].setValue===false){
         setValueFilled(false);
       }
       else{
         setValueFilled(true);
       }
     }
+    fetchUsers();
   }
+
 , []);
         
   return (

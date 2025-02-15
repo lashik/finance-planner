@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import './fonts.css';
 import PersonalDetails from './components/PersonalDetails';
 import Portfolio from 'components/Portfolio';
+import Fpassword from 'components/Fpassword';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/" element={<Register/>}/>
           <Route exact path="/Dashboard" element={<Dashboard/>} />
           <Route path="/Portfolio" element={<Portfolio/>} />
+          <Route path="/Fpassword" element={<Fpassword/>} />
         </Routes>
       </Router>
     </>
