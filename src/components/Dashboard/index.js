@@ -28,12 +28,11 @@ function Dashboard(props) {
   }
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data, error } = await supabase.from('users').select('*').eq('email', globalVar);
-      
+      const { data, error } = await supabase.from('users').select('setValue').eq('email', globalVar).single();
       if (error) {
         console.error(error);
       }
-      else if (data[0].setValue===false){
+      else if (data["setValue"]===false){
         setValueFilled(false);
       }
       else{

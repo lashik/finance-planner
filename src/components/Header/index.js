@@ -30,7 +30,6 @@ function Header(props) {
   return (
     <div className={styles.searchToolbox}>
       <div className={styles.row5}>
-        <img className={styles.image2} src={"/assets/horizontal_logo.png"} alt="alt text" />
 
         <button className={styles.block4}>
           <img className={styles.searchIcon} src={"/assets/search_icon.svg"} alt="alt text" />

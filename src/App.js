@@ -10,7 +10,7 @@ import './fonts.css';
 import PersonalDetails from './components/PersonalDetails';
 import Portfolio from 'components/Portfolio';
 import Fpassword from 'components/Fpassword';
-
+import Card from 'components/Card';
 
 function App() {
   useEffect(() => {
@@ -21,13 +21,18 @@ function App() {
       AOS.refresh();
     }, 1500);
   }, []);
-
+  const policyData = {
+    'Agent Code': '3451',
+    'Policy Effective Date': 'Select Date',
+    'Is this named operator policy?': 'Select',
+  };
   return (
     <>
+    
       <Router basename={process.env.BASE_PATH}>
         <Routes>
           <Route path="/Form" element={<PersonalDetails/>} />
-          <Route exact path="/" element={<Register/>}/>
+          <Route exact path="/a" element={<Register/>}/>
           <Route exact path="/Dashboard" element={<Dashboard/>} />
           <Route path="/Portfolio" element={<Portfolio/>} />
           <Route path="/Fpassword" element={<Fpassword/>} />

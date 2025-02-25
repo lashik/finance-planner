@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
 import styles from './index.module.scss';
 import emailjs from '@emailjs/browser';
 import { supabase } from 'supabaseClient';
 import { setGlobalVar } from 'db';
+
 function Register(props) {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(true);
   const [passwordSet, setPasswordSet] = useState(false);
-  emailjs.init({
-    publicKey:'seycVOycaTBuJBPz_',
-    privateKey:'Qjn19vl8g0WrM7ImytMXf',
-  });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  
   const [fpassword, setfPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -24,27 +24,27 @@ function Register(props) {
     number: '',
     password: '',
     passwF: '',
-    pdfilled: 'false' // Ensure password is included if needed
+    pdfilled: 'false',
+    setValue: 'false',
   });
 
-  // Fetch users from Supabase
+  emailjs.init({
+    publicKey: 'seycVOycaTBuJBPz_',
+    privateKey: 'Qjn19vl8g0WrM7ImytMXf',
+  });
 
-
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle registration or login
   const handleSubmit = async () => {
     if (fpassword) {
-      
       const { error } = await supabase
         .from("users")
         .select("*")
-        .eq("email", formData.userId)
-        
+        .eq("email", formData.userId);
+
       if (error) {
         alert("Error: No such user registered" + error.message);
         return;
@@ -52,10 +52,10 @@ function Register(props) {
       const otp = Math.floor(100000 + Math.random() * 900000).toString();
       const { error1 } = await supabase
         .from("users")
-        .update({"otp": otp})
+        .update({ "otp": otp })
         .eq("email", formData.userId)
         .single();
-      if(error1){
+      if (error1) {
         alert("Error: " + error1.message);
         return;
       }
@@ -63,26 +63,39 @@ function Register(props) {
 
       emailjs.send('service_fkfd0vm', 'template_l0a4w86', {
         to_name: formData.name,
-        message: "The otp is "+otp,
+        message: "The otp is " + otp,
         reply_to: formData.userId,
-        })
-      .then((result) => {
-        alert('Email sent successfully!');
-        
-      }, (error) => {
-        alert('Failed to send email, please try again.'+JSON.stringify(error, null, 2));
-      });
+      })
+        .then((result) => {
+          alert('Email sent successfully!');
+        }, (error) => {
+          alert('Failed to send email, please try again.' + JSON.stringify(error, null, 2));
+        });
       navigate("/Fpassword");
     } else {
       if (isRegister) {
         if (!passwordSet) {
           setPasswordSet(true);
-          return
+          return;
         } else if (formData.password !== formData.passwF) {
           alert("Passwords do not match");
           return;
-        }
-        else {
+        } else {
+          const { data: existingUsers, error: checkError } = await supabase
+            .from("users")
+            .select("*")
+            .eq("email", formData.email);
+
+          if (checkError) {
+            alert("Error: " + checkError.message);
+            return;
+          }
+
+          if (existingUsers.length > 0) {
+            alert("User already exists with this email.");
+            return;
+          }
+
           const { error } = await supabase.from("users").insert([
             {
               name: formData.name,
@@ -92,20 +105,18 @@ function Register(props) {
               number: formData.number,
               password: formData.password,
               pdfilled: formData.pdfilled,
-              //createdAt: new Date().toISOString()
+              setValue: formData.setValue,
             }
           ]);
 
           if (error) {
             alert("Error: " + error.message);
           } else {
-
             setGlobalVar(formData.email);
             navigate("/Dashboard");
           }
         }
       } else {
-        // **Login: Check user credentials**
         const { data, error } = await supabase
           .from("users")
           .select("*")
@@ -123,11 +134,9 @@ function Register(props) {
       }
     }
   };
-  return (
-    <section
-      className={cn(styles['finance-section'], props.className, 'register')}>
-      {/* Main finance section */}
 
+  return (
+    <section className={cn(styles['finance-section'], props.className, 'register')}>
       <div className={styles['welcome-row']}>
         <div className={styles['welcome-message']}>
           <div className={styles['title-box-box']}>
@@ -152,15 +161,11 @@ function Register(props) {
               </div>
             </div>
           </div>
-          {/* Introductory image */}
 
           <div className={styles['detail-cards']}>
-            {/* Detailed info cards */}
-
             {isRegister ? (
-
-              (!passwordSet ? (
-                <div className={styles['info-card']} >
+              !passwordSet ? (
+                <div className={styles['info-card']}>
                   <div className={styles['name-section']}>
                     <span className={styles['label-name']}>Name:</span>
                     <input type="text" name='name' className={styles['input-name']} value={formData.name} onChange={handleChange} />
@@ -184,28 +189,73 @@ function Register(props) {
                   </div>
                 </div>
               ) : (
-                <div className={styles['info-card']} >
+                <div className={styles['info-card']}>
                   <div className={styles['name-section']}>
                     <span className={styles['label-name']}>New Password:</span>
-                    <input type="password" name='password' className={styles['input-name']} value={formData.password} onChange={handleChange} />
+                    <div className={styles['password-container']}>
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        name='password'
+                        className={styles['input-name']}
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                      <button
+                        type="button"
+                        className={styles['toggle-password']}
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <img className={styles['show']} alt="eh"src={"/assets/hidden.png"} /> : <img className={styles['show']} alt="eh"src={"/assets/eye.png"}/>}
+                      </button>
+                    </div>
                   </div>
                   <div className={styles['email-section']}>
                     <span className={styles['label-email']}>Confirm Password:</span>
-                    <input type="password" name='passwF' className={styles['input-email']} value={formData.passwF} onChange={handleChange} />
+                    <div className={styles['password-container']}>
+                      <input
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        name='passwF'
+                        className={styles['input-email']}
+                        value={formData.passwF}
+                        onChange={handleChange}
+                      />
+                      <button
+                        type="button"
+                        className={styles['toggle-password']}
+                        onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      >
+                        {showConfirmPassword ? <img className={styles['show']} alt="eh"src={"/assets/hidden.png"} /> : <img className={styles['show']} alt="eh"src={"/assets/eye.png"}/>}
+                      </button>
+                    </div>
                   </div>
                 </div>
-              ))
+              )
             ) : (
-              (!fpassword ? (
+              !fpassword ? (
                 <div className={styles['info-card']}>
                   <div className={styles['name-section']}>
-                    <span className={styles['label-name']}>User ID:</span>
+                    <span className={styles['label-name']} style={{width: 'auto', marginRight: '14px'}}>User ID:</span>
                     <input type="text" name='userId' className={styles['input-name']} value={formData.userId} onChange={handleChange} />
                   </div>
 
                   <div className={styles['number-section']}>
                     <span className={styles['label-number']}>Password:</span>
-                    <input type="password" name='password' className={styles['input-number']} value={formData.password} onChange={handleChange} />
+                    <div className={styles['password-container']}>
+                      <input
+                        type={showLoginPassword ? 'text' : 'password'}
+                        name='password'
+                        className={styles['input-number']}
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                      <button
+                        type="button"
+                        className={styles['toggle-password']}
+                        onClick={() => setShowLoginPassword(!showLoginPassword)}
+                      >
+                        {showLoginPassword ? <img className={styles['show']} alt="eh" src={"/assets/hidden.png"} /> : <img className={styles['show']} alt="eh" src={"/assets/eye.png"}/>}
+                      </button>
+                    </div>
                   </div>
                   <div className={styles['number-section']}>
                     <button className={styles['forgot']} onClick={() => { setfPassword(true) }}>Forgot Password </button>
@@ -215,11 +265,10 @@ function Register(props) {
                 <div className={styles['info-card']}>
                   <div className={styles['name-section']} style={{ flexDirection: 'column' }}>
                     <span className={styles['label-name']} style={{ width: 'auto', marginBottom: '20px', fontSize: '14px' }}>Enter the email you have registered your account with </span>
-                    <input type="text" name='userId' className={styles['input-name']} value={formData.userId} onChange={handleChange} />
+                    <input  type="text" name='userId' className={styles['input-name']} value={formData.userId} onChange={handleChange}  />
                   </div>
-
                 </div>
-              ))
+              )
             )}
             <div className={styles['button-section']}>
               <button className={styles['submit-button']} onClick={handleSubmit}>Submit</button>
@@ -230,7 +279,7 @@ function Register(props) {
           </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 }
 

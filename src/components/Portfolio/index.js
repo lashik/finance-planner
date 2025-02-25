@@ -127,10 +127,10 @@ function Portfolio(props) {
                         onChange={handleChange}
                       />
                       
-                      <RadioGroup orientation="horizontal">
+                      {/* <RadioGroup orientation="horizontal">
                         <Radio value="yes">Yes</Radio>
                         <Radio value="no">No</Radio>
-                      </RadioGroup>
+                      </RadioGroup> */}
                       
                     </div>
                   ))}

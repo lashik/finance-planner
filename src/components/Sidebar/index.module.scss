@@ -1,28 +1,23 @@
 @use "../utils" as *;
 @use "../global" as *;
 
-
-
-
-
 .headerSection {
   display: flex;
   flex-direction: column;
   width: 13.33%;
   min-width: 0;
-  background-color: rgb(0 154 154);
+  background-color: rgb(255, 255, 255);
   outline-offset: 0;
   border-radius: 0 0 16px 16px;
- position: absolute;
-  min-height:100vh;
-  height:auto;
-  font-family: 'Inter'; 
-  font-style: normal; 
-  font-weight: 600; 
+  position: relative;
+  min-height: 100vh;
+  height: auto;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
   font-size: 14px;
-  top:0px;
-  left:0px;
-  
+  top: 0px;
+  left: 0px;
 }
 
 .headerContainer {
@@ -31,64 +26,52 @@
   align-items: center;
   row-gap: 34px;
   margin: 0 0 472px;
-
-  @include md {
-    position: relative;
-    margin: 0 0 150px;
-  }
-
-  @include xs {
-    margin: 0 0 80px;
-  }
-
-  @include tn {
-    margin: 0 0 50px;
-  }
 }
 
 .brandingBlock {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: rgb(0 102 102);
-  border-radius: 0 0 16px 16px;
+  background-color: rgb(255, 255, 255);
 }
 
 .brandingRow {
   display: flex;
+  flex-direction: row;
+  align-items: center;
   column-gap: 27px;
-  margin: 24px;
-
-  @include xs {
-    position: relative;
-    column-gap: 16px;
-    margin: 24px 16px;
-  }
-
-  @include tn {
-    column-gap: 8px;
-    margin: 24px 8px;
+  margin: 24px 0px 0px 24px;
+  @media (max-width: 1200px) {
+    justify-content: center;
+    margin: 24px 0px 0px 0px; // Hide text on small screens
   }
 }
 
-.companyLogo {
+.logo {
   width: 24px;
-  object-fit: cover;
+  height: 24px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.companyLogo {
+  background-image: url('../../../public/assets/891b6c13b0d25bd9e7ffb88860b74834.png');
 }
 
 .siteTitle {
   margin: 1px 0 3px;
   width: 114px;
   font: 700 16px/1.25 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
+  color: rgb(0, 0, 0);
   letter-spacing: -0.32px;
 }
 
-.siteTitle{
-  @media (max-width: 1000px) {
+.siteTitle {
+  @media (max-width: 1200px) {
     display: none; // Hide text on small screens
   }
 }
+
 .secondaryLogo {
   margin: 4px 0;
   width: 16px;
@@ -108,31 +91,34 @@
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-  margin: 0 12px;
-
-  @include tn {
-    position: relative;
-    margin: 0 8px;
-  }
+  // margin: 0 12px;
+  width: 100%;
+  // @include tn {
+  //   position: relative;
+  //   margin: 0 8px;
+  // }
 }
 
 .navTitle {
   display: flex;
   align-items: center;
   font: 500 12px/1 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
+  color: rgb(0, 0, 0);
   text-transform: uppercase;
   letter-spacing: 0.4px;
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
+  }
 }
 
 .navItem {
   display: flex;
-  column-gap: 12px;
+  column-gap: 0px;
 
   @include tn {
     column-gap: 8px;
   }
-  
 }
 
 .navIcon {
@@ -143,36 +129,87 @@
 .scheduleLink {
   width: 152px;
   font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
+  color: rgb(0, 0, 0);
   letter-spacing: -0.28001px;
   text-decoration: none;
-  &:hover{
-    color: white;
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
   }
 }
 
 .portfolioNavItem {
   display: flex;
   column-gap: 12px;
-  margin: 8px 0px 0;
-  border-radius: 3px;
   align-items: center;
-  width: 90%;
+  width: 100%;
   padding: 2%;
+  
   @include tn {
     position: relative;
     column-gap: 8px;
     margin: 28px 8px 0;
   }
-  &:hover{
-    background-color: rgb(0 102 102);
+
+  &:hover {
+    border-right: 2px solid $active-color1;
+  }
+  @media (max-width: 1000px) {
+    justify-content: center ; // Hide text on small screens
   }
 }
 
 .portfolioIcon {
   width: 20px;
-  object-fit: cover;
+  height: 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
+.dashboardIcon {
+  background-image: url('../../../public/assets/dashboard.png');
+}
+
+.profileIcon {
+  background-image: url('../../../public/assets/profile.png');
+}
+
+.goalIcon {
+  background-image: url('../../../public/assets/goal.png');
+}
+
+.warningIcon {
+  background-image: url('../../../public/assets/warning.png');
+}
+
+.investmentIcon {
+  background-image: url('../../../public/assets/investment.png');
+}
+
+.portfolioNavItem:hover {
+  .dashboardIcon {
+    background-image: url('../../../public/assets/dashboard_active.png');
+  }
+  .profileIcon {
+    background-image: url('../../../public/assets/profile_active.png');
+  }
+  .goalIcon {
+    background-image: url('../../../public/assets/goal_active.png');
+  }
+  .warningIcon {
+    background-image: url('../../../public/assets/warning_active.png');
+  }
+  .investmentIcon {
+    background-image: url('../../../public/assets/investment_active.png');
+  }
+  .scheduleLink {
+    color: $active-color1;
+  }
+  .portfolioLink {
+    color: $active-color1;
+  }
+}
+
 .Icon {
   width: 20px;
   object-fit: cover;
@@ -180,9 +217,10 @@
 
 .portfolioLink {
   text-decoration: none; /* Remove underline */
-  color: white;
-  &:hover{
-    color: white;
+  color: rgb(0, 0, 0);
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
   }
 }
 
@@ -216,6 +254,10 @@
   font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
   color: rgb(229 227 227);
   letter-spacing: -0.28001px;
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
+  }
 }
 
 .settingsIcon {
@@ -240,20 +282,32 @@
     margin: 12px 0 0 8px;
   }
 }
-.navTitle, .scheduleLink, .incomeLink, .settingsLink, .portfolioLink {
+
+.navTitle,
+.scheduleLink,
+.incomeLink,
+.settingsLink,
+.portfolioLink {
   @media (max-width: 900px) {
     display: none; // Hide text on small screens
   }
 }
-.navIcon, .portfolioIcon, .incomeIcon, .settingsIcon, .notificationIcon {
+
+.navIcon,
+.portfolioIcon,
+.incomeIcon,
+.settingsIcon,
+.notificationIcon {
   width: 20px; // Ensure icons are appropriately sized
 }
+
 .navigationBar {
   @media (max-width: 768px) {
     flex-direction: row; // Change layout to row for smaller screens
     justify-content: space-around; // Space out icons
   }
 }
+
 .divider {
   width: 2px;
   height: 140px;
@@ -345,6 +399,10 @@
   font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
   color: rgb(229 227 227);
   letter-spacing: -0.28001px;
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
+  }
 }
 
 .settingsNavItem {
@@ -369,6 +427,10 @@
   font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
   color: rgb(229 227 227);
   letter-spacing: -0.28001px;
+
+  @media (max-width: 1000px) {
+    display: none; // Hide text on small screens
+  }
 }
 
 .extraSettingsIcon {

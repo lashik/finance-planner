@@ -293,8 +293,8 @@ input {
   width: 300px;
   height: 41px;
   background: #FEFEFE;
-  border: 1px solid #86DBDB;
-  border-radius: 1px;
+  border: 1px solid #6F7482;
+  border-radius: 3px;
   color: black;
   right: 4px;
   bottom: 3px;
@@ -302,14 +302,19 @@ input {
   font-style: normal; 
   font-weight: 600; 
   font-size: 14px;
+  &:focus{
+    border: 2px solid $active-color;
+    outline: none;
+  }
 }
+
 .input-country,.input-dob{
   box-sizing: border-box;
   width: 90px;
   height: 41px;
   background: #FEFEFE;
-  border: 1px solid #86DBDB;
-  border-radius: 1px;
+  border: 1px solid #6F7482;
+  border-radius: 3px;
   color: black;
   right: 6px;
   bottom: 3px;
@@ -317,6 +322,10 @@ input {
   font-style: normal; 
   font-weight: 600; 
   font-size: 14px;
+  &:focus{
+    border: 2px solid $active-color;
+    outline: none;
+  }
 }
 
 .input-dob{
@@ -389,7 +398,7 @@ input {
   font-weight: 600; 
   font-size: 12.4px;
   top: 50%;
-  background: #63acac;
+  background-color: #86DCDB;
   border-radius: 100px;
   align-items: center;
 }
@@ -401,4 +410,21 @@ input {
   margin-bottom: 20px;
   justify-content: space-evenly;
   
+}
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  margin-left: 10px;
+  background: none;
+  border: none;
+  color: #6f7482;
+  cursor: pointer;
+  font-size: 14px;
+}
+.show{
+  width: 20px;
+  height: 20px;
 }
