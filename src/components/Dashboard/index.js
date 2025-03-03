@@ -65,7 +65,7 @@ function Dashboard(props) {
           <Header />
           {valueFilled ? (
             <div className={styles.portfolioContent}>
-              <article className={styles.portfolioTitle}>My Portfolio Projections</article>
+              {/* <article className={styles.portfolioTitle}>My Portfolio Projections</article>
               <div className={styles.profileGrid}>
                 {Object.entries(assetClasses).map(([category, subtypes]) => (
                   <div key={category} className={styles.block5}>
@@ -103,7 +103,8 @@ function Dashboard(props) {
                   <p>After 10 Years: ₹{projections.after10Years}</p>
                   <p>After 20 Years: ₹{projections.after20Years}</p>
                 </div>
-              </div>
+              </div> */}
+              Not decided what to put
             </div>
           ) : (
             <>
