@@ -1,0 +1,89 @@
+@use "../utils" as *;
+@use "../global" as *;
+
+.containerSection {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  background-color: $main-bg-color;
+}
+
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  //max-width: 600px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sliderContainer {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+width: 50%;
+  width: 50%;
+}
+
+label {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.slider {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.riskLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.portfolioContainer {
+  margin-top: 20px;
+}
+
+.portfolioTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.portfolioList {
+  list-style: none;
+  padding: 0;
+}
+
+.portfolioItem {
+  display: flex;
+  justify-content: center; // Center contents horizontally
+  align-items: center; // Center contents vertically
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  width: 100%; // Ensure full width for consistency
+}
+
+.portfolioName {
+  font-size: 16px;
+  flex: 1; // Allow name to take available space
+  text-align: left; // Align name to the left within its flex space
+  padding-right: 20px; // Add spacing between name and values
+}
+
+.portfolioValue {
+  font-size: 16px;
+  font-weight: bold;
+  flex: 0 0 140px; // Fixed width for value spans to ensure uniformity
+  text-align: left; // Align values to the right within their fixed space
+  margin-left: 10px; // Add spacing between value spans
+}
+
+.portfolioValue:nth-child(2) {
+  margin-right: 20px; // Extra spacing between Old and New values
+}

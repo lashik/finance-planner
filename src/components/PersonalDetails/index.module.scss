@@ -325,7 +325,7 @@
   flex-direction: column;
   row-gap: 63px;
   left: 18%;
-  width: 87%;
+  width: 100%; 
   min-width: 0;
   
   @include xl {
@@ -501,7 +501,7 @@
   height: 33px;
   min-height: 33px;
   background-color: rgb(255 255 255);
-  outline-color: #ABF3F2;
+  outline-color: $active-color;
   border-radius: 1px;
   margin-left: 0px;
   border: 1px #c2c6c9 solid ;
@@ -543,7 +543,7 @@
   height: 33px;
   min-height: 33px;
   background-color: rgb(255 255 255);
-  outline-color: #ABF3F2;
+  outline-color: $active-color;
   border-radius: 1px;
   margin-left: 0px;
   border: 1px #c2c6c9 solid ;

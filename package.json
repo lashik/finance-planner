@@ -18,6 +18,7 @@
     "@vercel/edge-config": "^1.4.0",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
+    "chart.js": "^4.4.8",
     "classnames": "^2.3.2",
     "cra-sass": "^0.0.5",
     "emailjs": "^4.0.3",

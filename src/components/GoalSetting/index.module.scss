@@ -1,0 +1,74 @@
+@use "../utils" as *;
+@use "../global" as *;
+
+.containerSection {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  background-color: $main-bg-color;
+  
+  
+  
+}
+.title{
+  font:$main-font;
+  font-size: 20px;
+
+}
+.contentBlock {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: stretch;
+  gap:10px;
+
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  max-width: 500px;
+}
+
+label {
+  
+  font:$main-font;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.inputField,
+.selectField {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.proposedInvestments {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.submitButton {
+  background-color: $active-color1;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  max-width: 1000px;
+}
+.form{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}

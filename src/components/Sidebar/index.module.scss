@@ -24,8 +24,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  row-gap: 34px;
-  margin: 0 0 472px;
+  gap: 34px;
+  
 }
 
 .brandingBlock {
@@ -33,6 +33,7 @@
   flex-direction: column;
   width: 100%;
   background-color: rgb(255, 255, 255);
+  box-shadow: $shadow;
 }
 
 .brandingRow {
@@ -40,7 +41,13 @@
   flex-direction: row;
   align-items: center;
   column-gap: 27px;
-  margin: 24px 0px 0px 24px;
+  margin: 28px 0px 28px 24px;
+  @media (max-width: 1600px) {
+    justify-content: start;
+    column-gap: 5px;
+    margin: 24px 0px 0px 0px; // Hide text on small screens
+  }
+
   @media (max-width: 1200px) {
     justify-content: center;
     margin: 24px 0px 0px 0px; // Hide text on small screens
@@ -82,9 +89,11 @@
   display: flex;
   flex-direction: column;
   row-gap: 0;
-  width: 208px;
-  max-width: 85%;
+  width: 100%;
+  //max-width: 85%;
   height: 100vh;
+  justify-content: flex-start;
+  
 }
 
 .mainNavSection {
@@ -93,6 +102,7 @@
   row-gap: 8px;
   // margin: 0 12px;
   width: 100%;
+  
   // @include tn {
   //   position: relative;
   //   margin: 0 8px;
@@ -106,7 +116,7 @@
   color: rgb(0, 0, 0);
   text-transform: uppercase;
   letter-spacing: 0.4px;
-
+  padding-left: 8%;
   @media (max-width: 1000px) {
     display: none; // Hide text on small screens
   }
@@ -115,7 +125,7 @@
 .navItem {
   display: flex;
   column-gap: 0px;
-
+  
   @include tn {
     column-gap: 8px;
   }
@@ -144,11 +154,12 @@
   align-items: center;
   width: 100%;
   padding: 2%;
-  
+  padding-left: 15%;
   @include tn {
-    position: relative;
+    
     column-gap: 8px;
     margin: 28px 8px 0;
+    padding-left: none;
   }
 
   &:hover {

@@ -1,0 +1,364 @@
+@use "../utils" as *;
+@use "../global" as *;
+
+.containerSection {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+
+  @include  sm  {
+    height: auto; // Allow natural height on small screens
+  }
+}
+
+.contentBlock {
+  flex: 1;
+  padding: 0 10px; // Base padding for small screens
+
+  @include  md  {
+    padding: 20px; // Full padding for medium and larger screens
+  }
+}
+
+.content {
+  background: #f5f7fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 15px;
+  font: $main-font;
+
+  @include  lg  {
+    margin: 20px;
+    padding: 20px;
+  }
+}
+
+.title {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 22px;
+    margin-bottom: 18px;
+  }
+
+  @include  lg  {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+}
+
+.chartContainer {
+  margin-bottom: 15px;
+  text-align: center;
+  width: 60%;
+  //height: 20vh;
+  margin: 0 auto;
+  //max-width: 400px;
+
+  @include  xxs  {
+    width: 90%;
+    //height: 15vh;
+  }
+
+  @include  md  {
+    width: 80%;
+    //height: 25vh;
+  }
+
+  @include  lg  {
+    //height: 200px;
+  }
+}
+
+.chartContainer canvas {
+  width: 80%;
+  //height: 100%;
+}
+
+.fiveYearLabel {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font: $main-font;
+
+  @include  xxs  {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  @include  md  {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.fiveYearLabel span {
+  font-size: 12px;
+  color: #333;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 14px;
+  }
+}
+
+.projectionControls {
+  margin-bottom: 15px;
+  text-align: center;
+  font: $main-font;
+
+  @include  lg  {
+    margin-bottom: 20px;
+  }
+}
+
+.projectionControls label {
+  font-size: 14px;
+  margin-right: 8px;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  @include  lg  {
+    font-size: 16px;
+  }
+}
+
+.projectionControls .projectionSlider {
+  width: 60%;
+  height: 8px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  margin: 0 8px;
+
+  @include  xxs  {
+    width: 70%;
+    height: 6px;
+    margin: 0 5px;
+  }
+
+  @include  md  {
+    width: 65%;
+    height: 9px;
+    margin: 0 10px;
+  }
+
+  @include  lg  {
+    width: 70%;
+    height: 10px;
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #007bff;
+    cursor: pointer;
+    border-radius: 50%;
+
+    @include  xxs  {
+      width: 12px;
+      height: 12px;
+    }
+
+    @include  md  {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: #007bff;
+    cursor: pointer;
+    border-radius: 50%;
+
+    @include  xxs  {
+      width: 12px;
+      height: 12px;
+    }
+
+    @include  md  {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.investmentProjections {
+  margin-top: 15px;
+  font: $main-font;
+
+  @include  lg  {
+    margin-top: 20px;
+  }
+}
+
+.investmentTitle {
+  color: #333;
+  margin-bottom: 8px;
+  font: $main-font;
+  font-size: 18px;
+
+  @include  md  {
+    font-size: 19px;
+    margin-bottom: 9px;
+  }
+
+  @include  lg  {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+}
+
+.investmentColumn {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  font: $main-font;
+
+  @include  xxs  {
+    margin-bottom: 10px;
+  }
+
+  @include  md  {
+    margin-bottom: 14px;
+  }
+}
+
+.categoryName {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+
+  @include  lg  {
+    font-size: 16px;
+  }
+}
+
+.projectionValue {
+  font-size: 12px;
+  margin: 2px 0;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 13px;
+  }
+
+  @include  lg  {
+    font-size: 14px;
+  }
+}
+
+.projectionResults {
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: 15px;
+  font: $main-font;
+
+  @include  lg  {
+    font-size: 16px;
+    margin-top: 20px;
+  }
+}
+
+.resultItem {
+  margin: 4px 0;
+  font: $main-font;
+
+  @include  md  {
+    margin: 5px 0;
+  }
+}
+
+
+
+.portfolioItem {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+
+  @include  xxs  {
+    padding: 6px;
+  }
+
+  @include  md  {
+    padding: 10px;
+  }
+}
+
+.portfolioName {
+  font-size: 14px;
+  flex: 1;
+  text-align: left;
+  padding-right: 1px;
+  font: $main-font;
+
+  @include  md  {
+    font-size: 15px;
+    padding-right: 2px;
+  }
+
+  @include  lg  {
+    font-size: 16px;
+  }
+}
+
+.portfolioValue {
+  font-size: 14px;
+  font: $main-font;
+  flex: 0 0 180px;
+  text-align: left;
+  margin-left: 8px;
+
+  @include  xxs  {
+    flex: 0 0 150px;
+    font-size: 12px;
+    margin-left: 5px;
+  }
+
+  @include  md  {
+    flex: 0 0 190px;
+    font-size: 15px;
+    margin-left: 10px;
+  }
+}
+
+.portfolioValue:nth-child(2) {
+  margin-right: 15px;
+
+  @include  xxs  {
+    margin-right: 10px;
+  }
+
+  @include  md  {
+    margin-right: 20px;
+  }
+}

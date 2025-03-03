@@ -55,7 +55,7 @@ function Register(props) {
         .update({ "otp": otp })
         .eq("email", formData.userId)
         .single();
-      if (error1) {
+      if (error1) { 
         alert("Error: " + error1.message);
         return;
       }
@@ -75,12 +75,6 @@ function Register(props) {
     } else {
       if (isRegister) {
         if (!passwordSet) {
-          setPasswordSet(true);
-          return;
-        } else if (formData.password !== formData.passwF) {
-          alert("Passwords do not match");
-          return;
-        } else {
           const { data: existingUsers, error: checkError } = await supabase
             .from("users")
             .select("*")
@@ -95,6 +89,13 @@ function Register(props) {
             alert("User already exists with this email.");
             return;
           }
+          setPasswordSet(true);
+          return;
+        } else if (formData.password !== formData.passwF) {
+          alert("Passwords do not match");
+          return;
+        } else {
+          
 
           const { error } = await supabase.from("users").insert([
             {

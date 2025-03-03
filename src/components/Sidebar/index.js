@@ -30,15 +30,15 @@ function Sidebar(props) {
             </div>
             <div className={styles.portfolioNavItem}>
               <div className={`${styles.portfolioIcon} ${styles.goalIcon}`} />
-              <Link className={styles.portfolioLink} to={'/Portfolio'}>Goal Setting</Link>
+              <Link className={styles.portfolioLink} to={'/Goal'}>Goal Setting</Link>
             </div>
             <div className={styles.portfolioNavItem}>
               <div className={`${styles.portfolioIcon} ${styles.warningIcon}`} />
-              <Link className={styles.portfolioLink} to={'/Portfolio'}>Risk adjustments</Link>
+              <Link className={styles.portfolioLink} to={'/Risk'}>Risk adjustments</Link>
             </div>
             <div className={styles.portfolioNavItem}>
               <div className={`${styles.portfolioIcon} ${styles.investmentIcon}`} />
-              <Link className={styles.portfolioLink} to={'/Portfolio'}>Portfolio's</Link>
+              <Link className={styles.portfolioLink} to={'/Projections'}>Portfolio's</Link>
             </div>
           </div>
         </nav>

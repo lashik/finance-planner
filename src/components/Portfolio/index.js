@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-import { RadioGroup, Radio } from "@heroui/react";
+
 import styles from './index.module.scss';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';

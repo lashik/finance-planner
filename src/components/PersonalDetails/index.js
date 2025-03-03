@@ -103,6 +103,7 @@ function PersonalDetails(props) {
                       fontWeight: 600,
                       fontSize: "12.4px",
                       lineHeight: "15px",
+                      borderBlockColor: "{$active-color}",
                     }}>
 
                     <Option value="Service" className={styles.dropdown_item} sx={{
@@ -146,6 +147,7 @@ function PersonalDetails(props) {
                       fontWeight: 600,
                       fontSize: "12.4px",
                       lineHeight: "15px",
+                      
                     }}>Professional</Option>
                   </Select>
 

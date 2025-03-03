@@ -10,7 +10,10 @@ import './fonts.css';
 import PersonalDetails from './components/PersonalDetails';
 import Portfolio from 'components/Portfolio';
 import Fpassword from 'components/Fpassword';
-import Card from 'components/Card';
+
+import GoalSetting from 'components/GoalSetting';
+import RiskAdjustments from 'components/RiskAdjustments';
+import PortfolioMy from 'components/PortfolioMy';
 
 function App() {
   useEffect(() => {
@@ -32,10 +35,13 @@ function App() {
       <Router basename={process.env.BASE_PATH}>
         <Routes>
           <Route path="/Form" element={<PersonalDetails/>} />
-          <Route exact path="/a" element={<Register/>}/>
+          <Route exact path="/" element={<Register/>}/>
           <Route exact path="/Dashboard" element={<Dashboard/>} />
           <Route path="/Portfolio" element={<Portfolio/>} />
           <Route path="/Fpassword" element={<Fpassword/>} />
+          <Route path="/Goal" element={<GoalSetting/>} />
+          <Route path="/Risk" element={<RiskAdjustments/>} />
+          <Route path="/Projections" element={<PortfolioMy/>} />
         </Routes>
       </Router>
     </>
