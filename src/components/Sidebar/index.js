@@ -40,6 +40,10 @@ function Sidebar(props) {
               <div className={`${styles.portfolioIcon} ${styles.investmentIcon}`} />
               <Link className={styles.portfolioLink} to={'/Projections'}>Portfolio's</Link>
             </div>
+            <div className={styles.portfolioNavItem}>
+              <div className={`${styles.portfolioIcon} ${styles.goalIcon}`} />
+              <Link className={styles.portfolioLink} to={'/Portfolio'}>My Portfolio</Link>
+            </div>
           </div>
         </nav>
       </div>

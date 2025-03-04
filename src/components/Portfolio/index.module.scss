@@ -484,6 +484,13 @@
       column-gap: 8px;
     }
   }
+  .inputName {
+    font: $main-font;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    color: #333;
+  }
 
   .maritalStatusLabel {
     width: 88px;

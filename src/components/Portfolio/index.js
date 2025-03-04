@@ -1,13 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-
-
 import styles from './index.module.scss';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
-import {  TextField } from '@mui/material';
-import { useState,useEffect } from 'react';
+import { Button } from '@mui/material';
 import { supabase } from 'supabaseClient';
 import { globalVar } from 'db';
 import { useNavigate } from 'react-router-dom';
@@ -15,54 +12,35 @@ import { useNavigate } from 'react-router-dom';
 function Portfolio(props) {
   const navigate = useNavigate();
   const assetClasses = {
-    "Equity (Stocks)": ["Direct Stocks", "Equity Mutual Funds", "ETFs", "Small-Cap Stocks", "Mid-Cap Stocks", "Large-Cap Stocks"],
-    "Fixed-Income (Bonds & Debt Instruments)": ["Government Bonds", "Corporate Bonds", "Fixed Deposits", "Debt Mutual Funds"],
-    "Real Estate": ["Residential Property", "Commercial Property", "REITs"],
-    "Commodities": ["Gold & Silver", "Oil & Natural Gas", "Agricultural Commodities"],
-    "Cryptocurrencies": ["Bitcoin", "Ethereum", "Altcoins", "NFTs"],
-    "Alternative Investments": ["Private Equity", "Hedge Funds", "Collectibles"],
-    "Cash & Cash Equivalents": ["Savings Accounts", "Money Market Funds", "T-Bills"],
-    "Derivatives & Structured Products": ["Options & Futures", "Swaps & Other Derivatives"]
+    "Equity": ["Direct Stocks", "Equity Mutual Funds", "Exchange-Traded Funds (ETFs)", "Small-Cap, Mid-Cap, Large-Cap Stocks"],
+    "Fixed-Income": ["Government Bonds", "Corporate Bonds", "Fixed Deposits (FDs)", "Debt Mutual Funds"],
+    "Real Estate": ["Residential Property"],
+    "Commodities": ["Gold & Silver"],
+    "Cryptocurrencies & Digital Assets": ["Cryptocurrencies & Digital Assets"],
+    "Alternative Investments": [],
+    "Cash & Cash Equivalents": ["Savings Account"],
+    "Derivatives & Structured Products": []
   };
-  const [formData, setFormData] = useState({
-    directs: "",
-    equitymf: "",
-    etfs: "",
-    smallcs: "",
-    midcs: "",
-    largecs: "",
-    governmentb: "",
-    corporateb: "",
-    fixedd: "",
-    debtmf: "",
-    residentialp: "",
-    commercialp: "",
-    reits: "",
-    golds: "",
-    oilng: "",
-    agriculturalc: "",
-    bitcoin: "",
-    ethereum: "",
-    altcoins: "",
-    nfts: "",
-    privatee: "",
-    hedgef: "",
-    collectibles: "",
-    savingsa: "",
-    moneymf: "",
-    tbills: "",
-    optionsf: "",
-    swapsod: ""
-  });
+
+  const [formData, setFormData] = useState({});
+  const [existingInvestments, setExistingInvestments] = useState({});
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const { data, error } = await supabase.from("users").select("*").eq("email", globalVar).single();
+      const { data, error } = await supabase.from("users").select("existing_investments").eq("email", globalVar).single();
 
       if (error) {
         console.error("Error fetching users:", error.message);
       } else if (data) {
-        setFormData(data); // Set formData to last user
+        setExistingInvestments(data.existing_investments);
+        const initialFormData = {};
+        Object.entries(data.existing_investments).forEach(([category, investments]) => {
+          investments.forEach(investment => {
+            const key = investment.type.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
+            initialFormData[key] = parseFloat(investment.details.replace(/[^0-9.-]+/g, ""));
+          });
+        });
+        setFormData(initialFormData);
       }
     };
 
@@ -75,11 +53,29 @@ function Portfolio(props) {
     setFormData({ ...formData, [name]: value });
   };
 
+  // Handle slider changes
+  const handleSliderChange = (name, value) => {
+    setFormData({ ...formData, [name]: value });
+  };
+
   // Handle form submission
   const handleSubmit = async () => {
-    const {  error } = await supabase
+    const updatedInvestments = { ...existingInvestments };
+
+    Object.entries(assetClasses).forEach(([category, subtypes]) => {
+      updatedInvestments[category] = subtypes.map(subtype => {
+        const key = subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
+        return {
+          type: subtype,
+          details: `₹${formData[key]}`,
+          description: existingInvestments[category]?.find(item => item.type === subtype)?.description || ""
+        };
+      });
+    });
+
+    const { error } = await supabase
       .from("users")
-      .update(formData)
+      .update({ existing_investments: updatedInvestments })
       .eq("email", globalVar);
 
     if (error) {
@@ -87,58 +83,46 @@ function Portfolio(props) {
       console.error("Update error:", error.message);
     } else {
       alert("User details updated successfully!");
-      navigate("/Dashboard");
+      
     }
   };
+
   return (
     <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
       <div className={styles.row}>
         <Sidebar />
 
         <div className={styles.portfolioSection}>
-          {/* Portfolio Section: Displays user's portfolios and search functionality */}
-
           <Header />
 
           <p className={styles.portfolioTitle}>My Portfolio</p>
           
           <div className={styles.profileGrid}>
-            {/* Grid of user profiles with personal details */}
-
-            
-              
-
-            {Object.entries(assetClasses).map(([category, subtypes]) =>  (
-                <div key={category} className={styles.block5}>
-                  <div className={styles.row6}>
-                    <div className={styles.info6}>{category}</div>
-                  </div>
-                  {subtypes.map(subtype => (
+            {Object.entries(assetClasses).map(([category, subtypes]) => (
+              <div key={category} className={styles.block5}>
+                <div className={styles.row6}>
+                  <div className={styles.info6}>{category}</div>
+                </div>
+                {subtypes.map(subtype => {
+                  const key = subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
+                  return (
                     <div key={subtype} className={styles.row8}>
                       <div className={styles.info71}>{subtype}</div>
-                      
-                      <TextField
+                      <input
                         type="number"
-                        variant="outlined"
-                        size="small"
-                        sx={{ font: "600 14px 'Inter', normal" }}
-                        name={subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("")}
-                        value={formData[subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("")]}
+                        className={styles.inputName} // Assuming this is the class used in Register input-name
+                        name={key}
+                        value={formData[key] || ""}
                         onChange={handleChange}
                       />
-                      
-                      {/* <RadioGroup orientation="horizontal">
-                        <Radio value="yes">Yes</Radio>
-                        <Radio value="no">No</Radio>
-                      </RadioGroup> */}
-                      
                     </div>
-                  ))}
-                </div>
-              ))}
-              <button className={styles.submit} onClick={handleSubmit}>Submit</button>
-
-
+                  );
+                })}
+              </div>
+            ))}
+            <Button variant="contained" color="primary" onClick={handleSubmit} className={styles.submit}>
+              Submit
+            </Button>
           </div>
         </div>
       </div>
