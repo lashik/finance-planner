@@ -4,72 +4,185 @@ import cn from 'classnames';
 import styles from './index.module.scss';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
-import { Button } from '@mui/material';
+import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { supabase } from 'supabaseClient';
 import { globalVar } from 'db';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'; // Add UUID for stable keys
+
+const investmentTypes = [
+  {
+    category: "Equity",
+    subtypes: [
+      { name: "Direct Stocks", inputs: ["expected_return", "invested_amount"] },
+      { name: "Equity Mutual Funds", inputs: ["expected_return", "invested_amount"] },
+      { name: "Exchange-Traded Funds (ETFs)", inputs: ["expected_return", "invested_amount"] },
+      { name: "Small-Cap, Mid-Cap, Large-Cap Stocks", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Fixed-Income",
+    subtypes: [
+      { name: "Government Bonds", inputs: ["interest_rate", "invested_amount", "maturity_period"] },
+      { name: "Corporate Bonds", inputs: ["interest_rate", "invested_amount", "maturity_period"] },
+      { name: "Fixed Deposits (FDs)", inputs: ["interest_rate", "invested_amount", "maturity_period"] },
+      { name: "Debt Mutual Funds", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Real Estate",
+    subtypes: [
+      { name: "Residential Property", inputs: ["rental_yield", "property_value"] },
+      { name: "Commercial Property", inputs: ["rental_yield", "property_value"] },
+      { name: "Real Estate Investment Trusts (REITs)", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Commodities",
+    subtypes: [
+      { name: "Gold & Silver", inputs: ["expected_return", "invested_amount"] },
+      { name: "Oil & Natural Gas", inputs: ["expected_return", "invested_amount"] },
+      { name: "Agricultural Commodities", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Alternative Investments",
+    subtypes: [
+      { name: "Private Equity", inputs: ["expected_return", "invested_amount"] },
+      { name: "Venture Capital", inputs: ["expected_return", "invested_amount"] },
+      { name: "Hedge Funds", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Cryptocurrencies & Digital Assets",
+    subtypes: [
+      { name: "Bitcoin", inputs: ["expected_return", "invested_amount"] },
+      { name: "Ethereum", inputs: ["expected_return", "invested_amount"] },
+      { name: "Altcoins", inputs: ["expected_return", "invested_amount"] },
+      { name: "Non-Fungible Tokens (NFTs)", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Derivatives & Structured Products",
+    subtypes: [
+      { name: "Options", inputs: ["expected_return", "invested_amount"] },
+      { name: "Futures", inputs: ["expected_return", "invested_amount"] },
+      { name: "Swaps", inputs: ["expected_return", "invested_amount"] }
+    ]
+  },
+  {
+    category: "Cash & Cash Equivalents",
+    subtypes: [
+      { name: "Savings Accounts", inputs: ["interest_rate", "invested_amount"] },
+      { name: "Money Market Funds", inputs: ["expected_return", "invested_amount"] },
+      { name: "Treasury Bills (T-Bills)", inputs: ["interest_rate", "invested_amount", "maturity_period"] }
+    ]
+  }
+];
 
 function Portfolio(props) {
   const navigate = useNavigate();
-  const assetClasses = {
-    "Equity": ["Direct Stocks", "Equity Mutual Funds", "Exchange-Traded Funds (ETFs)", "Small-Cap, Mid-Cap, Large-Cap Stocks"],
-    "Fixed-Income": ["Government Bonds", "Corporate Bonds", "Fixed Deposits (FDs)", "Debt Mutual Funds"],
-    "Real Estate": ["Residential Property"],
-    "Commodities": ["Gold & Silver"],
-    "Cryptocurrencies & Digital Assets": ["Cryptocurrencies & Digital Assets"],
-    "Alternative Investments": [],
-    "Cash & Cash Equivalents": ["Savings Account"],
-    "Derivatives & Structured Products": []
-  };
+  const [investmentEntries, setInvestmentEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const [formData, setFormData] = useState({});
-  const [existingInvestments, setExistingInvestments] = useState({});
-
+  // Fetch investments from Supabase
   useEffect(() => {
-    const fetchUsers = async () => {
-      const { data, error } = await supabase.from("users").select("existing_investments").eq("email", globalVar).single();
+    const fetchInvestments = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from("users")
+        .select("existing_investments")
+        .eq("email", globalVar)
+        .single();
 
       if (error) {
-        console.error("Error fetching users:", error.message);
-      } else if (data) {
-        setExistingInvestments(data.existing_investments);
-        const initialFormData = {};
+        console.error("Error fetching investments:", error.message);
+        setLoading(false);
+        return;
+      }
+
+      if (data && data.existing_investments) {
+        console.log("Fetched investments:", data.existing_investments);
+        const parsedEntries = [];
         Object.entries(data.existing_investments).forEach(([category, investments]) => {
-          investments.forEach(investment => {
-            const key = investment.type.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
-            initialFormData[key] = parseFloat(investment.details.replace(/[^0-9.-]+/g, ""));
+          investments.forEach((investment) => {
+            const inputFields = {};
+            Object.entries(investment).forEach(([key, val]) => {
+              if (key !== "type" && key !== "description") {
+                inputFields[key] = val !== null ? String(val) : "";
+              }
+            });
+
+            parsedEntries.push({
+              id: uuidv4(),
+              category,
+              subtype: investment.type?.trim() || "",
+              description: investment.description?.trim() || "",
+              inputs: inputFields
+            });
           });
         });
-        setFormData(initialFormData);
+
+        setInvestmentEntries(parsedEntries);
+      } else {
+        setInvestmentEntries([]);
       }
+      setLoading(false);
     };
 
-    fetchUsers();
+    fetchInvestments();
   }, []);
 
-  // Handle form input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  // Handle input change
+  const handleInputChange = (id, input, value) => {
+    setInvestmentEntries((prevEntries) => {
+      const newEntries = prevEntries.map((entry) =>
+        entry.id === id
+          ? { ...entry, inputs: { ...entry.inputs, [input]: value || "" } }
+          : entry
+      );
+      console.log("Updated entries after input change:", newEntries);
+      return newEntries;
+    });
   };
 
-  // Handle slider changes
-  const handleSliderChange = (name, value) => {
-    setFormData({ ...formData, [name]: value });
+  // Handle subtype and description change
+  const handleEntryChange = (id, field, value) => {
+    setInvestmentEntries((prevEntries) => {
+      const newEntries = prevEntries.map((entry) =>
+        entry.id === id ? { ...entry, [field]: value } : entry
+      );
+      console.log("Updated entries after entry change:", newEntries);
+      return newEntries;
+    });
   };
 
-  // Handle form submission
+  // Add new investment
+  const handleAddEntry = (category) => {
+    setInvestmentEntries((prevEntries) => [
+      ...prevEntries,
+      { id: uuidv4(), category, subtype: "", description: "", inputs: {} }
+    ]);
+  };
+
+  // Remove an investment entry
+  const handleRemoveEntry = (id) => {
+    setInvestmentEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== id));
+  };
+
+  // Save investments to Supabase
   const handleSubmit = async () => {
-    const updatedInvestments = { ...existingInvestments };
+    const updatedInvestments = {};
 
-    Object.entries(assetClasses).forEach(([category, subtypes]) => {
-      updatedInvestments[category] = subtypes.map(subtype => {
-        const key = subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
-        return {
-          type: subtype,
-          details: `₹${formData[key]}`,
-          description: existingInvestments[category]?.find(item => item.type === subtype)?.description || ""
-        };
+    investmentEntries.forEach((entry) => {
+      const { category, subtype, description, inputs } = entry;
+      if (!updatedInvestments[category]) {
+        updatedInvestments[category] = [];
+      }
+      updatedInvestments[category].push({
+        type: subtype,
+        ...inputs,
+        description
       });
     });
 
@@ -79,51 +192,105 @@ function Portfolio(props) {
       .eq("email", globalVar);
 
     if (error) {
-      alert("Error updating user details. Please try again.");
+      alert("Error updating investments.");
       console.error("Update error:", error.message);
     } else {
-      alert("User details updated successfully!");
-      
+      alert("Investments updated successfully!");
+      navigate("/Dashboard");
     }
   };
 
   return (
-    <div className={cn(styles.mainContainer, props.className, 'creatio-form')}>
+    <div className={cn(styles.mainContainer, props.className, "creatio-form")}>
       <div className={styles.row}>
         <Sidebar />
-
         <div className={styles.portfolioSection}>
           <Header />
+          <div className={styles.portfolioTitle}>My Portfolio</div>
 
-          <p className={styles.portfolioTitle}>My Portfolio</p>
-          
-          <div className={styles.profileGrid}>
-            {Object.entries(assetClasses).map(([category, subtypes]) => (
-              <div key={category} className={styles.block5}>
-                <div className={styles.row6}>
-                  <div className={styles.info6}>{category}</div>
+          {loading ? (
+            <div>Loading investments...</div>
+          ) : (
+            <div className={styles.profileGrid}>
+              {investmentTypes.map(({ category, subtypes }) => (
+                <div key={category} className={styles.block5}>
+                  <div className={styles.row6}>
+                    <div className={styles.info6}>{category}</div>
+                    <Button onClick={() => handleAddEntry(category)} className={styles.addButton}>
+                      Add
+                    </Button>
+                  </div>
+                  {investmentEntries
+                    .filter((entry) => entry.category === category)
+                    .map((entry) => {
+                      const selectedSubtype = subtypes.find((sub) => sub.name === entry.subtype) || {
+                        inputs: []
+                      };
+                      return (
+                        <div key={entry.id} className={styles.row8}>
+                          <Select
+                            value={entry.subtype}
+                            onChange={(e) => handleEntryChange(entry.id, "subtype", e.target.value)}
+                            displayEmpty
+                            className={styles.inputName}
+                            inputProps={{ "data-testid": `subtype-select-${entry.id}` }}
+                          >
+                            <MenuItem value="" disabled>
+                              Select Subtype
+                            </MenuItem>
+                            {subtypes.map((subtype) => (
+                              <MenuItem key={subtype.name} value={subtype.name}>
+                                {subtype.name}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                          <TextField
+                            type="text"
+                            variant="outlined"
+                            size="small"
+                            className={styles.inputName}
+                            placeholder="Description"
+                            value={entry.description || ""}
+                            onChange={(e) => handleEntryChange(entry.id, "description", e.target.value)}
+                            inputProps={{ "data-testid": `description-input-${entry.id}` }}
+                          />
+                          {selectedSubtype.inputs.map((input) => (
+                            <TextField
+                              key={input}
+                              label={input}
+                              type="number"
+                              variant="outlined"
+                              size="small"
+                              className={styles.inputName}
+                              placeholder={input}
+                              value={entry.inputs[input] !== undefined ? String(entry.inputs[input]) : ""}
+                              onChange={(e) =>
+                                handleInputChange(entry.id, input, e.target.value)
+                              }
+                              inputProps={{ "data-testid": `${input}-input-${entry.id}` }}
+                            />
+                          ))}
+                          <Button
+                            onClick={() => handleRemoveEntry(entry.id)}
+                            className={styles.removeButton}
+                          >
+                            Remove
+                          </Button>
+                        </div>
+                      );
+                    })}
                 </div>
-                {subtypes.map(subtype => {
-                  const key = subtype.toLowerCase().split(/[\s-]+/).map((word, index) => (index === 0 ? word : word[0])).join("");
-                  return (
-                    <div key={subtype} className={styles.row8}>
-                      <div className={styles.info71}>{subtype}</div>
-                      <input
-                        type="number"
-                        className={styles.inputName} // Assuming this is the class used in Register input-name
-                        name={key}
-                        value={formData[key] || ""}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-            <Button variant="contained" color="primary" onClick={handleSubmit} className={styles.submit}>
-              Submit
-            </Button>
-          </div>
+              ))}
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleSubmit}
+                className={styles.submit}
+              >
+                Submit
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -131,7 +298,7 @@ function Portfolio(props) {
 }
 
 Portfolio.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Portfolio;

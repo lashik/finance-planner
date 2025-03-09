@@ -12,14 +12,27 @@ function RiskAdjustments(props) {
   const [portfolio, setPortfolio] = useState([]);
   const [existingInvestments, setExistingInvestments] = useState({});
 
-  const handleRiskChange = (e) => {
-    setRiskLevel(e.target.value);
-    updatePortfolio(e.target.value);
+  // Map full category names to simplified ones for risk adjustments
+  const categoryMapping = {
+    "Equity (Stocks)": "Equity",
+    "Fixed-Income (Bonds & Debt Instruments)": "Fixed-Income",
+    "Real Estate": "Real Estate",
+    "Commodities": "Commodities",
+    "Alternative Investments": "Alternative Investments",
+    "Cryptocurrencies & Digital Assets": "Cryptocurrencies & Digital Assets",
+    "Derivatives & Structured Products": "Derivatives",
+    "Cash & Cash Equivalents": "Cash & Cash Equivalents"
   };
 
-  const parseDetails = (details) => {
-    const value = details.match(/₹([\d,]+)/);
-    return value ? parseFloat(value[1].replace(/,/g, '')) : 0;
+  const handleRiskChange = (e) => {
+    const newRiskLevel = parseFloat(e.target.value);
+    setRiskLevel(newRiskLevel);
+    updatePortfolio(newRiskLevel);
+  };
+
+  const getInvestmentValue = (item) => {
+    // Use invested_amount or property_value based on availability
+    return parseFloat(item.invested_amount) || parseFloat(item.property_value) || 0;
   };
 
   const updatePortfolio = (risk) => {
@@ -27,40 +40,44 @@ function RiskAdjustments(props) {
 
     for (const category in existingInvestments) {
       existingInvestments[category].forEach((item) => {
-        const oldValue = parseDetails(item.details);
-        let newValue = 0;
+        const oldValue = getInvestmentValue(item);
+        let adjustmentFactor = 0;
+
+        const simplifiedCategory = categoryMapping[category] || category;
 
         if (risk < 33) {
           // Low risk
-          if (category === 'Commodities' || category === 'Real Estate' || category === 'Fixed-Income') {
-            newValue = (oldValue * 0.7).toFixed(2);
-          } else if (category === 'Equity') {
-            newValue = (oldValue * 0.2).toFixed(2);
-          } else if (category === 'Cryptocurrencies & Digital Assets') {
-            newValue = (oldValue * 0.05).toFixed(2);
-          } else if (category === 'Cash & Cash Equivalents') {
-            newValue = (oldValue * 0.025).toFixed(2);
+          if (simplifiedCategory === 'Commodities' || simplifiedCategory === 'Real Estate' || simplifiedCategory === 'Fixed-Income') {
+            adjustmentFactor = 0.7;
+          } else if (simplifiedCategory === 'Equity') {
+            adjustmentFactor = 0.2;
+          } else if (simplifiedCategory === 'Cryptocurrencies & Digital Assets') {
+            adjustmentFactor = 0.05;
+          } else if (simplifiedCategory === 'Cash & Cash Equivalents') {
+            adjustmentFactor = 0.025;
           }
         } else if (risk < 66) {
           // Medium risk
-          newValue = (oldValue * 0.3).toFixed(2);
+          adjustmentFactor = 0.3; // Simplified medium risk adjustment
         } else {
           // High risk
-          if (category === 'Commodities' || category === 'Real Estate' || category === 'Fixed-Income') {
-            newValue = (oldValue * 0.1).toFixed(2);
-          } else if (category === 'Equity') {
-            newValue = (oldValue * 0.4).toFixed(2);
-          } else if (category === 'Cryptocurrencies & Digital Assets') {
-            newValue = (oldValue * 0.3).toFixed(2);
-          } else if (category === 'Cash & Cash Equivalents') {
-            newValue = (oldValue * 0.025).toFixed(2);
+          if (simplifiedCategory === 'Commodities' || simplifiedCategory === 'Real Estate' || simplifiedCategory === 'Fixed-Income') {
+            adjustmentFactor = 0.1;
+          } else if (simplifiedCategory === 'Equity') {
+            adjustmentFactor = 0.4;
+          } else if (simplifiedCategory === 'Cryptocurrencies & Digital Assets') {
+            adjustmentFactor = 0.3;
+          } else if (simplifiedCategory === 'Cash & Cash Equivalents') {
+            adjustmentFactor = 0.025;
           }
         }
 
+        const newValue = (oldValue * adjustmentFactor).toFixed(2);
+
         updatedPortfolio.push({
-          name: item.type,
+          name: item.type || 'Unnamed Investment', // Fallback if type is missing
           oldValue: oldValue.toFixed(2),
-          newValue: newValue,
+          newValue: newValue
         });
       });
     }
@@ -78,7 +95,7 @@ function RiskAdjustments(props) {
 
       if (error) {
         console.error('Error fetching portfolio:', error.message);
-      } else {
+      } else if (data && data.existing_investments) {
         setExistingInvestments(data.existing_investments);
         updatePortfolio(riskLevel); // Initialize portfolio with default risk level
       }
@@ -117,9 +134,11 @@ function RiskAdjustments(props) {
             <ul className={styles.portfolioList}>
               {portfolio.map((item, index) => (
                 <li key={index} className={styles.portfolioItem}>
-                  <span className={styles.portfolioName}>{item.name}  ({(parseFloat(item.newValue)/parseFloat(item.oldValue))*100}%)</span>
-                  <span className={styles.portfolioValue}>Old: ₹{item.oldValue}</span>
-                  <span className={styles.portfolioValue}>New: ₹{parseFloat(item.oldValue) + parseFloat(item.newValue)}</span>
+                  <span className={styles.portfolioName}>
+                    {item.name} ({((parseFloat(item.newValue) / parseFloat(item.oldValue)) * 100).toFixed(2)}%)
+                  </span>
+                  <span className={styles.portfolioValue}>Old: ₹{item.oldValue.toLocaleString('en-IN')}</span>
+                  <span className={styles.portfolioValue}>New: ₹{item.newValue.toLocaleString('en-IN')}</span>
                 </li>
               ))}
             </ul>
