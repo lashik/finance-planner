@@ -8,7 +8,7 @@ import { Button, MenuItem, Select, TextField } from '@mui/material';
 import { supabase } from 'supabaseClient';
 import { globalVar } from 'db';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid'; // Add UUID for stable keys
+import { v4 as uuidv4 } from 'uuid';  
 
 const investmentTypes = [
   {
@@ -85,7 +85,6 @@ function Portfolio(props) {
   const [investmentEntries, setInvestmentEntries] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch investments from Supabase
   useEffect(() => {
     const fetchInvestments = async () => {
       setLoading(true);
@@ -133,7 +132,6 @@ function Portfolio(props) {
     fetchInvestments();
   }, []);
 
-  // Handle input change
   const handleInputChange = (id, input, value) => {
     setInvestmentEntries((prevEntries) => {
       const newEntries = prevEntries.map((entry) =>
@@ -146,7 +144,6 @@ function Portfolio(props) {
     });
   };
 
-  // Handle subtype and description change
   const handleEntryChange = (id, field, value) => {
     setInvestmentEntries((prevEntries) => {
       const newEntries = prevEntries.map((entry) =>
@@ -157,7 +154,6 @@ function Portfolio(props) {
     });
   };
 
-  // Add new investment
   const handleAddEntry = (category) => {
     setInvestmentEntries((prevEntries) => [
       ...prevEntries,
@@ -165,12 +161,10 @@ function Portfolio(props) {
     ]);
   };
 
-  // Remove an investment entry
   const handleRemoveEntry = (id) => {
     setInvestmentEntries((prevEntries) => prevEntries.filter((entry) => entry.id !== id));
   };
 
-  // Save investments to Supabase
   const handleSubmit = async () => {
     const updatedInvestments = {};
 

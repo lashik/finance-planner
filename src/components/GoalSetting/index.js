@@ -18,8 +18,6 @@ function GoalSetting(props) {
   const handleSelectionChange = (e) => setSelection(e.target.value);
 
   const calculateProposedInvestments = () => {
-    // Logic to calculate proposed investments based on years, corpusTarget, and selection
-    // For simplicity, let's assume a basic calculation
     const proposed = (parseFloat(corpusTarget) / parseFloat(years)).toFixed(2);
     setProposedInvestments(proposed);
   };

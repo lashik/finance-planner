@@ -14,7 +14,6 @@
   display: flex;
   justify-content: start;
 
-  //margin: 0 26px 0 0;
   width: 100vw;
   overflow-x: hidden;
   
@@ -22,303 +21,6 @@
 
 
 
-.topSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
-  margin: 0 0 472px;
-
-  @include md {
-    position: relative;
-    margin: 0 0 150px;
-  }
-
-  @include xs {
-    margin: 0 0 80px;
-  }
-
-  @include tn {
-    margin: 0 0 50px;
-  }
-}
-
-.brandingSection {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: rgb(0 102 102);
-  border-radius: 0 0 16px 16px;
-}
-
-.brandingRow {
-  display: flex;
-  column-gap: 27px;
-  margin: 24px;
-
-  @include xs {
-    position: relative;
-    column-gap: 16px;
-    margin: 24px 16px;
-  }
-
-  @include tn {
-    column-gap: 8px;
-    margin: 24px 8px;
-  }
-}
-
-.logoImage {
-  width: 24px;
-  object-fit: cover;
-}
-
-.companyName {
-  margin: 1px 0 3px;
-  width: 114px;
-  font: 700 16px/1.25 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.32px;
-}
-
-.secondaryIcon {
-  margin: 4px 0;
-  width: 16px;
-  object-fit: cover;
-}
-
-.navigationSection {
-  display: flex;
-  flex-direction: column;
-  row-gap: 0;
-  width: 208px;
-  max-width: 85%;
-}
-
-.currentSection {
-  display: flex;
-  align-items: center;
-  margin: 0 12px;
-  font: 500 12px/1 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-
-  @include tn {
-    position: relative;
-    margin: 0 8px;
-  }
-}
-
-.navItemRow {
-  display: flex;
-  column-gap: 12px;
-  margin: 18px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 18px 8px 0;
-  }
-}
-
-.sectionIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.sectionTitle {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.navItemRow1 {
-  display: flex;
-  column-gap: 12px;
-  margin: 28px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 28px 8px 0;
-  }
-}
-
-.image {
-  width: 20px;
-  object-fit: cover;
-}
-
-.subNavSection {
-  display: flex;
-  flex-direction: column;
-  margin: 18px 0 0;
-  background-color: rgb(0 102 102);
-  border-radius: 8px;
-}
-
-.row1 {
-  display: flex;
-  column-gap: 12px;
-  margin: 10px 12px;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 10px 8px;
-  }
-}
-
-.incomeTitle {
-  width: 124px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.incomeIcon {
-  margin: 2px 0;
-  width: 16px;
-  object-fit: cover;
-}
-
-.statusRow {
-  display: flex;
-  align-items: center;
-  column-gap: 11px;
-  margin: 12px 0 0 23px;
-
-  @include xs {
-    position: relative;
-    margin: 12px 0 0 16px;
-  }
-
-  @include tn {
-    column-gap: 8px;
-    margin: 12px 0 0 8px;
-  }
-}
-
-.color {
-  width: 2px;
-  height: 140px;
-  min-height: 140px;
-  background-color: rgb(0 102 102);
-}
-
-.row2 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 0;
-  width: 172px;
-  min-width: 0;
-}
-
-.earningsLabel {
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-}
-
-.refundsInfo {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0 0;
-  width: 100%;
-  max-width: 100%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-align: center;
-  background-color: rgb(0 102 102);
-  padding: 8px 12px;
-  border-radius: 8px;
-  letter-spacing: -0.24px;
-}
-
-.declinesLabel {
-  margin: 12px 0 0;
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-   
-}
-
-.payoutsLabel {
-  margin: 20px 0 0;
-  width: 86.05%;
-  font: 500 12px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.24px;
-}
-
-.info1 {
-  display: flex;
-  align-items: center;
-  margin: 40px 12px 0;
-  font: 500 12px/1 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-
-  @include tn {
-    position: relative;
-    margin: 40px 8px 0;
-  }
-}
-
-.row3 {
-  display: flex;
-  column-gap: 12px;
-  margin: 18px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 18px 8px 0;
-  }
-}
-
-.info2 {
-  width: 152px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.row4 {
-  display: flex;
-  column-gap: 12px;
-  margin: 28px 12px 0;
-
-  @include tn {
-    position: relative;
-    column-gap: 8px;
-    margin: 28px 8px 0;
-  }
-}
-
-.settingsIcon {
-  width: 20px;
-  object-fit: cover;
-}
-
-.settingsTitle {
-  width: 124px;
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(229 227 227);
-  letter-spacing: -0.28001px;
-}
-
-.image1 {
-  margin: 2px 0;
-  width: 16px;
-  object-fit: cover;
-}
 
 .portfolioSection {
   display: flex;
@@ -340,80 +42,9 @@
   }
 }
 
-.searchToolbox {
-  display: flex;
-  flex-direction: column;
-  background-color: rgb(0 102 102);
-  border-radius: 16px;
-}
-
-.row5 {
-  display: flex;
-  align-items: center;
-  column-gap: 0;
-  margin: 24px;
-
-  @include xs {
-    position: relative;
-    margin: 24px 16px;
-  }
-
-  @include tn {
-    margin: 24px 8px;
-  }
-}
-
-.image2 {
-  width: 121px;
-  min-width: 0;
-  object-fit: cover;
-}
-
-.block4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  column-gap: 12px;
-  min-width: 208px;
-  background-color: rgb(255 255 255);
-  padding: 10px 12px;
-  border-radius: 8px;
-}
-
-.searchIcon {
-  width: 20px;
-}
-
-.searchBtn {
-  font: 500 14px/1.43 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0 / 60%);
-  letter-spacing: -0.28001px;
-}
-
-.portfolioTitle {
-  margin: 0 3%;
-  font: 700 24px/0.83 Inter, Helvetica, Arial, serif;
-  color: rgb(57 46 46);
-  letter-spacing: -0.88px;
-
-  @include md {
-    align-items: flex-start;
-    font-size: 22px;
-  }
-
-  @include xxs {
-    font-size: 20px;
-  }
-
-  @include tn {
-    position: relative;
-    margin: 0 8px;
-  }
-}
 
 .profileGrid {
   display: grid;
-  //align-content: center;
   justify-content: start;
   margin: 0px  0px 0px 5%;
   width: 100%;
@@ -446,7 +77,6 @@
   background-color: rgb(255 255 255);
   border-radius: 5px;
   box-shadow: $shadow;
-  //
   @include md {
     
     width: 100%;
@@ -526,7 +156,6 @@
 
 .maritalStatusLabel {
   width: 88px;
-  //font: 700 13px/1.54 Inter, Helvetica, Arial, serif;
   color: rgb(0 0 0);
   letter-spacing: -0.26px;
   font-family: 'Inter'; 
@@ -586,7 +215,6 @@
   line-height: 30px;
   color: rgb(0 0 0);
   letter-spacing: 0px;
-  // line-height: 19px;
 }
 
 .info7 {
@@ -610,7 +238,6 @@
    line-height: 15px;
   
    color: #6f7482;
-  // letter-spacing: -0.26px;
   align-items: flex-start;
 }
 

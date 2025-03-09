@@ -8,11 +8,10 @@ import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 
 function RiskAdjustments(props) {
-  const [riskLevel, setRiskLevel] = useState(50); // Default to medium risk
+  const [riskLevel, setRiskLevel] = useState(50); 
   const [portfolio, setPortfolio] = useState([]);
   const [existingInvestments, setExistingInvestments] = useState({});
 
-  // Map full category names to simplified ones for risk adjustments
   const categoryMapping = {
     "Equity (Stocks)": "Equity",
     "Fixed-Income (Bonds & Debt Instruments)": "Fixed-Income",
@@ -31,7 +30,6 @@ function RiskAdjustments(props) {
   };
 
   const getInvestmentValue = (item) => {
-    // Use invested_amount or property_value based on availability
     return parseFloat(item.invested_amount) || parseFloat(item.property_value) || 0;
   };
 
@@ -58,7 +56,7 @@ function RiskAdjustments(props) {
           }
         } else if (risk < 66) {
           // Medium risk
-          adjustmentFactor = 0.3; // Simplified medium risk adjustment
+          adjustmentFactor = 0.3; 
         } else {
           // High risk
           if (simplifiedCategory === 'Commodities' || simplifiedCategory === 'Real Estate' || simplifiedCategory === 'Fixed-Income') {
@@ -75,7 +73,7 @@ function RiskAdjustments(props) {
         const newValue = (oldValue * adjustmentFactor).toFixed(2);
 
         updatedPortfolio.push({
-          name: item.type || 'Unnamed Investment', // Fallback if type is missing
+          name: item.type || 'Unnamed Investment', 
           oldValue: oldValue.toFixed(2),
           newValue: newValue
         });
@@ -97,7 +95,7 @@ function RiskAdjustments(props) {
         console.error('Error fetching portfolio:', error.message);
       } else if (data && data.existing_investments) {
         setExistingInvestments(data.existing_investments);
-        updatePortfolio(riskLevel); // Initialize portfolio with default risk level
+        updatePortfolio(riskLevel); 
       }
     };
 

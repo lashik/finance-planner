@@ -31,18 +31,16 @@ function Header(props) {
     fetchUserDetails();
   }, []);
 
-  // Function to toggle dropdown visibility
   const toggleDropdown = (event) => {
     event.stopPropagation();
     setIsOpen((prev) => !prev);
   };
 
-  // Closes dropdown if user clicks outside
   const handleLogout = async () => {
-    setGlobalVar("");  // Clear user data
-    setIsOpen(false);  // Close dropdown
-    navigate("/", { replace: true });  // Redirect properly
-    window.location.reload(); // Force UI update if needed
+    setGlobalVar("");  
+    setIsOpen(false);  
+    navigate("/", { replace: true });  
+    window.location.reload(); 
   };
 
   return (

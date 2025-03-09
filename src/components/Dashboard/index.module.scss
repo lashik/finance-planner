@@ -9,15 +9,14 @@
   overflow: hidden;
   width: 100%;
   min-height: 100vh;
-  //height: 100vh;
-  //height: auto;
+  
 }
 
 .contentBlock {
   display: flex;
   justify-content: start;
   flex-direction: row;
-  // margin: 0 26px 0 0;
+  
   width: 100vw;
 
 
@@ -69,8 +68,7 @@
   min-width: 0;
   height: fit-content;
   position: relative;
-  //top: 1%;
-  //left: 12%;
+
 
 }
 
@@ -86,212 +84,6 @@
   max-width: auto;
 }
 
-.portfolioTitle {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  width: fit-content;
-  font: 700 24px/0.83 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0 / 80%);
-  letter-spacing: -0.88px;
-
-  @include md {
-    align-items: flex-start;
-    font-size: 22px;
-  }
-
-  @include xxs {
-    font-size: 20px;
-  }
-}
-
-.portfolioItem {
-  display: flex;
-  justify-content: start;
-  flex-direction: row;
-  column-gap: none;
-  width: auto;
-  height: auto;
-  background-color: white;
-  box-shadow: $shadow;
-  border-radius: 3%;
-
-  @include xs {
-    column-gap: 16px;
-    flex-direction: column;
-  }
-
-  @include tn {
-    column-gap: 8px;
-  }
-}
-
-.incomeBlock,
-.expenseBlock,
-.chartBlock {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: 26.3vw;
-  height: 100%;
-  align-items: center;
-  background-color: white;
-
-  border-right: 1px black solid;
-}
-
-.chartBlock {
-  border-right: none;
-  height: auto;
-  border-top-right-radius: 3%;
-  border-bottom-right-radius: 3%;
-}
-
-.incomeBlock {
-  border-top-left-radius: 3%;
-  border-bottom-left-radius: 3%;
-}
-
-.incomeChart {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.expenseTitle {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.portfolioImage {
-  width: 108px;
-  min-width: 0;
-  outline-offset: 0;
-  border-radius: 8px;
-  object-fit: cover;
-  outline: rgb(229 227 227) dashed 1px;
-}
-
-.portfolioBlock {
-  display: flex;
-  flex-direction: column;
-  width: 154px;
-  min-width: 0;
-  background-color: rgb(255 255 255);
-  outline-offset: 0;
-  border-radius: 8px;
-  box-shadow: 4px 4px 4px 0 rgb(0 0 0 / 25%);
-  outline: rgb(229 227 227) dashed 1px;
-}
-
-.portfolioRow {
-  display: flex;
-  flex-direction: column;
-  row-gap: 7px;
-  margin: 11px 10px 10px 9px;
-
-  @include tn {
-    position: relative;
-    margin: 11px 8px 10px;
-  }
-}
-
-.portfolioInfo {
-  display: flex;
-  flex-direction: column;
-  row-gap: 13px;
-}
-
-.portfolioName {
-  display: flex;
-  justify-content: center;
-  font: 700 24px/0.83 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0);
-  text-align: center;
-  letter-spacing: -0.48px;
-
-  @include md {
-    align-items: flex-start;
-    font-size: 22px;
-  }
-
-  @include xxs {
-    font-size: 20px;
-  }
-}
-
-.incomeInfo {
-  font: 700 15px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0);
-  letter-spacing: -0.3px;
-}
-
-.expenseInfo {
-  font: 700 15px/1.33 Inter, Helvetica, Arial, serif;
-  color: rgb(0 0 0);
-  letter-spacing: -0.3px;
-}
-
-.incomeChartImage {
-  margin: 0 0 0 auto;
-  width: 24px;
-  object-fit: cover;
-}
-
-.incomeAmtBrk {
-  border-top: 1px solid black;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-}
-
-.incomeTitle {
-  width: 80%;
-  border-bottom: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12.4px;
-}
-
-div[id='investment'].incomeTitle {
-  width: 80%;
-  border-bottom: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12.4px;
-}
-
-.expenseAmount {
-  width: 100%;
-  border-top: 1px solid black;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  font-size: 12.4px;
-}
 
 .profileGrid {
   display: grid;
@@ -329,9 +121,7 @@ div[id='investment'].incomeTitle {
   margin-bottom: 5px;
 }
 
-.runButton {
-  margin-top: 20px;
-}
+
 
 .projections {
   margin-top: 20px;

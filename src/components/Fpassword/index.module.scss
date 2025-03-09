@@ -31,15 +31,12 @@ input {
   
   @include md {
     position: relative;
-    //margin: 150px auto;
   }
 
   @include xs {
-    //margin: 80px auto;
   }
 
   @include tn {
-    //margin: 50px auto;
   }
 }
 
@@ -112,10 +109,7 @@ input {
   }
 }
 
-.info_span0 {
-  font: 700 0.5em/1.15 "Roboto Condensed", Helvetica, Arial, serif;
-  color: rgb(30 30 30);
-}
+
 
 .info-row {
   display: flex;
@@ -129,20 +123,7 @@ input {
   }
 }
 
-.intro-figure {
-  margin: 9px 0 0;
-  width: 353px;
-  min-width: 0;
-  object-fit: cover;
 
-  @include xxs {
-    position: relative;
-    margin: 0;
-    width: 100%;
-    min-width: unset;
-    max-width: 353px;
-  }
-}
 
 .detail-cards {
   display: flex;
@@ -155,7 +136,6 @@ input {
   
   @include xxs {
     position: relative;
-    //width: 100%;
     min-width: unset;
   }
   
@@ -189,55 +169,11 @@ input {
   color: rgb(30 30 30);
 }
 
-.icon-name {
-  width: 309px;
-  min-width: 0;
-  object-fit: cover;
-}
 
-.dob-country-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  column-gap: 32px;
-  margin: 23px 10px 0 0;
 
-  @include xs {
-    column-gap: 16px;
-  }
 
-  @include tn {
-    column-gap: 8px;
-  }
-}
 
-.label-dob {
-  display: flex;
-  align-items: center;
-  width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
-  color: rgb(30 30 30);
-}
 
-.icon-dob {
-  width: 99px;
-  min-width: 0;
-  object-fit: cover;
-}
-
-.label-country {
-  display: flex;
-  align-items: center;
-  width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
-  color: rgb(30 30 30);
-}
-
-.icon-country {
-  width: 99px;
-  min-width: 0;
-  object-fit: cover;
-}
 
 .email-section {
   display: flex;
@@ -254,33 +190,10 @@ input {
   color: rgb(30 30 30);
 }
 
-.icon-email {
-  width: 309px;
-  min-width: 0;
-  object-fit: cover;
-}
 
-.number-section {
-  display: flex;
-  align-items: center;
-  column-gap: 0;
-  margin: 26px 0 0;
-}
 
-.label-number {
-  display: flex;
-  align-items: center;
-  width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
-  color: rgb(30 30 30);
-}
 
-.icon-number {
-  width: 309px;
-  min-width: 0;
-  object-fit: cover;
-}
-.input-name,.input-email,.input-number{
+.input-name,.input-email{
   box-sizing: border-box;
   width: 300px;
   height: 41px;
@@ -295,25 +208,7 @@ input {
   font-weight: 600; 
   font-size: 14px;
 }
-.input-country,.input-dob{
-  box-sizing: border-box;
-  width: 90px;
-  height: 41px;
-  background: #FEFEFE;
-  border: 1px solid #86DBDB;
-  border-radius: 1px;
-  color: black;
-  right: 6px;
-  bottom: 3px;
-  font-family: 'Inter'; 
-  font-style: normal; 
-  font-weight: 600; 
-  font-size: 14px;
-}
 
-.input-dob{
-  margin-left: 10px;
-}
 .frame-31 {
   display: flex;
   flex-direction: row;

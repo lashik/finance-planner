@@ -31,15 +31,12 @@ input {
   
   @include md {
     position: relative;
-    //margin: 150px auto;
   }
 
   @include xs {
-    //margin: 80px auto;
   }
 
   @include tn {
-    //margin: 50px auto;
   }
 }
 
@@ -129,20 +126,7 @@ input {
   }
 }
 
-.intro-figure {
-  margin: 9px 0 0;
-  width: 353px;
-  min-width: 0;
-  object-fit: cover;
 
-  @include xxs {
-    position: relative;
-    margin: 0;
-    width: 100%;
-    min-width: unset;
-    max-width: 353px;
-  }
-}
 
 .detail-cards {
   display: flex;
@@ -155,7 +139,6 @@ input {
   
   @include xxs {
     position: relative;
-    //width: 100%;
     min-width: unset;
   }
   

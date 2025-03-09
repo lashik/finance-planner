@@ -33,7 +33,6 @@ function PersonalDetails(props) {
     entertainment: "",
   });
 
-  // Fetch users from Supabase on component mount
   useEffect(() => {
     const fetchUsers = async () => {
       const { data, error } = await supabase.from("users").select("*").eq("email", globalVar).single();
@@ -42,20 +41,18 @@ function PersonalDetails(props) {
         console.error("Error fetching users:", error.message);
       } else if (data) {
         
-        setFormData(data); // Set formData to last user
+        setFormData(data); 
       }
     };
 
     fetchUsers();
   }, []);
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Handle form submission
   const handleSubmit = async () => {
     const {  error } = await supabase
       .from("users")

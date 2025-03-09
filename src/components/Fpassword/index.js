@@ -16,13 +16,10 @@ function Fpassword(props) {
     otp: '',
     password: '',
     passwF: '',
-    // Ensure password is included if needed
   });
 
-  // Fetch users from Supabase
   
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,7 +36,6 @@ function Fpassword(props) {
       return;
     }
   }
-  // Handle registration or login
   const handleSubmit = async () => {
     
 

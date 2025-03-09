@@ -7,16 +7,16 @@
   flex-direction: row;
 
   @include  sm  {
-    height: auto; // Allow natural height on small screens
+    height: auto; 
   }
 }
 
 .contentBlock {
   flex: 1;
-  padding: 0 10px; // Base padding for small screens
+  padding: 0 10px; 
 
   @include  md  {
-    padding: 20px; // Full padding for medium and larger screens
+    padding: 20px; 
   }
 }
 
@@ -56,28 +56,22 @@
   margin-bottom: 15px;
   text-align: center;
   width: 60%;
-  //height: 20vh;
   margin: 0 auto;
-  //max-width: 400px;
 
   @include  xxs  {
     width: 90%;
-    //height: 15vh;
   }
 
   @include  md  {
     width: 80%;
-    //height: 25vh;
   }
 
   @include  lg  {
-    //height: 200px;
   }
 }
 
 .chartContainer canvas {
   width: 80%;
-  //height: 100%;
 }
 
 .fiveYearLabel {
@@ -228,72 +222,6 @@
   }
 }
 
-.investmentColumn {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
-  font: $main-font;
-
-  @include  xxs  {
-    margin-bottom: 10px;
-  }
-
-  @include  md  {
-    margin-bottom: 14px;
-  }
-}
-
-.categoryName {
-  font-size: 14px;
-  font-weight: bold;
-  margin-bottom: 4px;
-  font: $main-font;
-
-  @include  md  {
-    font-size: 15px;
-    margin-bottom: 5px;
-  }
-
-  @include  lg  {
-    font-size: 16px;
-  }
-}
-
-.projectionValue {
-  font-size: 12px;
-  margin: 2px 0;
-  font: $main-font;
-
-  @include  md  {
-    font-size: 13px;
-  }
-
-  @include  lg  {
-    font-size: 14px;
-  }
-}
-
-.projectionResults {
-  text-align: center;
-  font-size: 14px;
-  color: #333;
-  margin-top: 15px;
-  font: $main-font;
-
-  @include  lg  {
-    font-size: 16px;
-    margin-top: 20px;
-  }
-}
-
-.resultItem {
-  margin: 4px 0;
-  font: $main-font;
-
-  @include  md  {
-    margin: 5px 0;
-  }
-}
 
 
 

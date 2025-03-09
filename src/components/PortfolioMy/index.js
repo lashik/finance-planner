@@ -6,15 +6,14 @@ import { supabase } from 'supabaseClient';
 import { globalVar } from 'db';
 import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
-import { Chart } from 'chart.js/auto'; // Ensure Chart.js is installed (npm install chart.js)
+import { Chart } from 'chart.js/auto'; 
 
 function PortfolioProjections(props) {
   const [netWorth, setNetWorth] = useState({ current: 0, predictions: {} });
   const [chartInstance, setChartInstance] = useState(null);
   const [investmentPredictions, setInvestmentPredictions] = useState({});
-  const [userData, setUserData] = useState(null); // Store fetched data for recalculation
+  const [userData, setUserData] = useState(null); 
 
-  // Map full category names to simplified ones for growth rates
   const categoryMapping = {
     "Equity (Stocks)": "Equity",
     "Fixed-Income (Bonds & Debt Instruments)": "Fixed-Income",
@@ -26,22 +25,19 @@ function PortfolioProjections(props) {
     "Cash & Cash Equivalents": "Cash & Cash Equivalents"
   };
 
-  // Default growth rates (used as fallback if user doesn't specify expected_return or interest_rate)
   const defaultGrowthRates = {
     "Equity": { "5_years": 7.5, "10_years": 7.0, "20_years": 6.5 },
     "Fixed-Income": { "5_years": 4.0, "10_years": 3.8, "20_years": 3.5 },
     "Real Estate": { "5_years": 5.5, "10_years": 5.0, "20_years": 4.5 },
     "Commodities": { "5_years": 6.5, "10_years": 6.0, "20_years": 5.5 },
-    "Alternative Investments": { "5_years": 8.0, "10_years": 7.5, "20_years": 7.0 }, // Added default
+    "Alternative Investments": { "5_years": 8.0, "10_years": 7.5, "20_years": 7.0 }, 
     "Cryptocurrencies & Digital Assets": { "5_years": 15.0, "10_years": 12.0, "20_years": 10.0 },
-    "Derivatives": { "5_years": 6.0, "10_years": 5.5, "20_years": 5.0 }, // Added default
+    "Derivatives": { "5_years": 6.0, "10_years": 5.5, "20_years": 5.0 }, 
     "Cash & Cash Equivalents": { "5_years": 2.5, "10_years": 2.3, "20_years": 2.0 }
   };
 
-  // Calculate the total value of a category based on the new data structure
   const calculateCategoryValue = (categoryArray) => {
     return categoryArray.reduce((sum, item) => {
-      // Check for relevant value fields (invested_amount, property_value, etc.)
       const value =
         parseFloat(item.invested_amount) ||
         parseFloat(item.property_value) ||
@@ -50,7 +46,6 @@ function PortfolioProjections(props) {
     }, 0);
   };
 
-  // Calculate growth rate for a category based on user inputs or defaults
   const getCategoryGrowthRates = (category, categoryArray) => {
     const simplifiedCategory = categoryMapping[category] || category;
     const defaultRates = defaultGrowthRates[simplifiedCategory] || {
@@ -59,7 +54,6 @@ function PortfolioProjections(props) {
       "20_years": 0
     };
 
-    // Calculate average user-specified growth rate (if provided)
     let avgExpectedReturn = 0;
     let hasCustomRate = false;
 
@@ -81,7 +75,7 @@ function PortfolioProjections(props) {
       avgExpectedReturn /= totalInvestments;
       return {
         "5_years": avgExpectedReturn,
-        "10_years": avgExpectedReturn * 0.95, // Slightly lower for longer terms
+        "10_years": avgExpectedReturn * 0.95,  
         "20_years": avgExpectedReturn * 0.9
       };
     }
@@ -110,7 +104,6 @@ function PortfolioProjections(props) {
       0
     );
 
-    // Use the updated net worth from the slider if provided, otherwise calculate
     const currentNetWorth = updatedNetWorth !== undefined
       ? updatedNetWorth
       : currentIncome + currentInvestmentsValue - totalExpenses;
@@ -147,7 +140,6 @@ function PortfolioProjections(props) {
     return { current: currentNetWorth, predictions: totalPredictedNetWorth };
   };
 
-  // Fetch data on mount
   useEffect(() => {
     const fetchData = async () => {
       const { data, error } = await supabase
@@ -160,7 +152,7 @@ function PortfolioProjections(props) {
         console.error('Error fetching data:', error.message);
       } else if (data) {
         const safeData = { ...data, existing_investments: JSON.parse(JSON.stringify(data.existing_investments)) };
-        setUserData(safeData); // Store the fetched data
+        setUserData(safeData); 
         setNetWorth(calculateProjections(safeData));
       }
     };
@@ -168,7 +160,6 @@ function PortfolioProjections(props) {
     fetchData();
   }, []);
 
-  // Update chart when netWorth changes
   useEffect(() => {
     if (netWorth.current && chartInstance) {
       chartInstance.destroy();
@@ -213,7 +204,6 @@ function PortfolioProjections(props) {
     };
   }, [netWorth]);
 
-  // Handle slider change and recalculate projections
   const handleSliderChange = (e) => {
     const newNetWorthValue = parseFloat(e.target.value);
     if (userData) {

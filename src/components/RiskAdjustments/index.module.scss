@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  //max-width: 600px;
 }
 
 .title {
@@ -62,28 +61,28 @@ label {
 
 .portfolioItem {
   display: flex;
-  justify-content: center; // Center contents horizontally
-  align-items: center; // Center contents vertically
+  justify-content: center;
+  align-items: center; 
   padding: 10px;
   border-bottom: 1px solid #ccc;
-  width: 100%; // Ensure full width for consistency
+  width: 100%; 
 }
 
 .portfolioName {
   font-size: 16px;
-  flex: 1; // Allow name to take available space
-  text-align: left; // Align name to the left within its flex space
-  padding-right: 20px; // Add spacing between name and values
+  flex: 1; 
+  text-align: left; 
+  padding-right: 20px;
 }
 
 .portfolioValue {
   font-size: 16px;
   font-weight: bold;
-  flex: 0 0 140px; // Fixed width for value spans to ensure uniformity
-  text-align: left; // Align values to the right within their fixed space
-  margin-left: 10px; // Add spacing between value spans
+  flex: 0 0 140px; 
+  text-align: left; 
+  margin-left: 10px; 
 }
 
 .portfolioValue:nth-child(2) {
-  margin-right: 20px; // Extra spacing between Old and New values
+  margin-right: 20px; 
 }
