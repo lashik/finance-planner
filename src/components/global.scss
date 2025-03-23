@@ -1,11 +1,86 @@
 
-$main-bg-color: #EAEFF5;
+$main-bg-color: #f4f8fb;
 $card-color: #ffffff;;
 $shadow:0 2px 10px rgba(0, 0, 0, 0.1);
-$main-font: 600 14px 'Inter', normal;
+$main-font: 600 14px 'Inter', sans-serif;
 $active-color: #007bff8e;
 $active-color1: #007bff;
 :root {
 
   --fallback-font-stack: Helvetica, Arial, serif;
+}
+// Colors
+$card-bg-color: #FFFFFF; // White
+$primary-text-color: #2a2a2a83; // Dark Gray
+$secondary-text-color: #6E7C87; // Muted Gray
+$placeholder-text-color: #AEB8C4; // Light Gray
+$link-color: #0084FF; // Bright Blue
+$border-color: #D9E2EC; // Light Gray
+$primary-accent-color: #0084FF; // Bright Blue
+$secondary-accent-color: #2A2A2A; // Dark Gray
+$error-color: #FF4D4F; // Red
+$success-color: #52C41A; // Green
+$warning-color: #FAAD14; // Yellow
+
+// Shadows
+$card-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); // Subtle shadow
+$hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // Hover shadow
+
+// Typography
+$font-family-primary: 'Inter', sans-serif;
+$font-size-header: 18px; // Headers
+$font-size-subheader: 16px; // Subheaders
+$font-size-body: 14px; // Body Text
+$font-size-placeholder: 14px; // Placeholder Text
+$font-weight-bold: 700;
+$font-weight-semi-bold: 600;
+$font-weight-regular: 400;
+$font-weight-light: 300;
+
+// Buttons
+$button-primary-bg: #0084FF; // Primary Button Background
+$button-primary-hover-bg: #0071E3; // Primary Button Hover Background
+$button-primary-text: #FFFFFF; // Primary Button Text
+$button-secondary-bg: #E1EAF5; // Secondary Button Background
+$button-secondary-text: #0084FF; // Secondary Button Text
+$button-disabled-bg: #D9E2EC; // Disabled Button Background
+$button-disabled-text: #AEB8C4; // Disabled Button Text
+$button-border-radius: 6px; // Button Border Radius
+$button-padding: 12px 20px; // Button Padding
+
+// Input Fields
+$input-bg-color: #FFFFFF; // Input Background
+$input-border-color: #D9E2EC; // Input Border Color
+$input-focus-border-color: #0084FF; // Input Focus Border Color
+$input-border-radius: 6px; // Input Border Radius
+$input-padding-horizontal: 10px; // Horizontal Padding
+$input-padding-vertical: 12px; // Vertical Padding
+$input-error-border-color: #FF4D4F; // Error Border Color
+
+// Sidebar
+$sidebar-bg-color: #F8FAFC; // Sidebar Background
+$sidebar-active-link-color: #0084FF; // Active Link Color
+$sidebar-inactive-link-color: #6E7C87; // Inactive Link Color
+$sidebar-hover-bg-color: #E1EAF5; // Hover Background
+
+// Modals & Alerts
+$modal-bg-color: #FFFFFF; // Modal Background
+$modal-overlay-color: rgba(0, 0, 0, 0.4); // Modal Overlay
+$alert-success-color: #52C41A; // Success Alert
+$alert-error-color: #FF4D4F; // Error Alert
+$alert-warning-color: #FAAD14; // Warning Alert
+
+// Layout & Spacing
+$card-padding: 20px; // Card Padding
+$form-section-margin: 20px 0px; // Form Section Margin
+$grid-gap: 20px; // Grid Gap
+$sidebar-width: 250px; // Sidebar Width
+
+// Transitions
+$transition-duration: 200ms; // Transition Duration
+$transition-ease: ease-in-out; // Transition Timing Function
+
+// Root Variables for Fallbacks
+:root {
+  --fallback-font-stack: Helvetica, Arial, sans-serif;
 }

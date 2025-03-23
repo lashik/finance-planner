@@ -6,7 +6,7 @@ import styles from './index.module.scss';
 import emailjs from '@emailjs/browser';
 import { supabase } from 'supabaseClient';
 import { setGlobalVar } from 'db';
-
+import InputField from 'components/InputFields';
 function Register(props) {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(true);
@@ -168,25 +168,21 @@ function Register(props) {
               !passwordSet ? (
                 <div className={styles['info-card']}>
                   <div className={styles['name-section']}>
-                    <span className={styles['label-name']}>Name:</span>
-                    <input type="text" name='name' className={styles['input-name']} value={formData.name} onChange={handleChange} />
+                    <InputField label="Name" name="name" value={formData.name} onChange={handleChange} />
                   </div>
 
                   <div className={styles['dob-country-section']}>
                     <span className={styles['label-dob']}>DOB:</span>
                     <input type="date" name='dob' className={styles['input-dob']} value={formData.dob} onChange={handleChange} placeholder=" " />
-                    <span className={styles['label-country']}>Country:</span>
-                    <input type="text" name='country' className={styles['input-country']} value={formData.country} onChange={handleChange} />
+                    <InputField label="Country" name="country" value={formData.country} onChange={handleChange} />
                   </div>
 
                   <div className={styles['email-section']}>
-                    <span className={styles['label-email']}>Email- ID</span>
-                    <input type="email" name='email' className={styles['input-email']} value={formData.email} onChange={handleChange} />
+                  <InputField label="Email" name="email" value={formData.email} onChange={handleChange} />
                   </div>
 
                   <div className={styles['number-section']}>
-                    <span className={styles['label-number']}>Number:</span>
-                    <input type="tel" name='number' className={styles['input-number']} value={formData.number} onChange={handleChange} />
+                     <InputField label="Number" name="number" type= "tel" value={formData.number} onChange={handleChange} />
                   </div>
                 </div>
               ) : (
@@ -235,7 +231,7 @@ function Register(props) {
               !fpassword ? (
                 <div className={styles['info-card']}>
                   <div className={styles['name-section']}>
-                    <span className={styles['label-name']} style={{width: 'auto', marginRight: '14px'}}>User ID:</span>
+                    <span className={styles['label-name']} style={{width: 'auto', marginRight: '14px'}}>Email ID:</span>
                     <input type="text" name='userId' className={styles['input-name']} value={formData.userId} onChange={handleChange} />
                   </div>
 

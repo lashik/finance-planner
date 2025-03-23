@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.14.0",
     "@heroui/radio": "^2.3.9",
     "@heroui/react": "^2.6.14",
+    "@mui/icons-material": "^6.4.8",
     "@mui/joy": "^5.0.0-beta.51",
     "@mui/material": "^6.4.2",
     "@mui/x-charts": "^7.25.0",

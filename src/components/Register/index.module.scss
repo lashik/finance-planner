@@ -168,7 +168,7 @@ input {
   display: flex;
   align-items: center;
   width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  font: 600 14px/1.21 Inter, Helvetica, Arial, serif;
   color: rgb(30 30 30);
 }
 
@@ -184,7 +184,7 @@ input {
   align-items: center;
   column-gap: 32px;
   margin: 23px 10px 0 0;
-
+  flex-grow: 1;
   @include xs {
     column-gap: 16px;
   }
@@ -198,7 +198,8 @@ input {
   display: flex;
   align-items: center;
   width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  
+  font: 600 14px/1.21 Inter, Helvetica, Arial, serif;
   color: rgb(30 30 30);
 }
 
@@ -254,7 +255,7 @@ input {
   display: flex;
   align-items: center;
   width: 71px;
-  font: 600 12.399999618530273px/1.21 Inter, Helvetica, Arial, serif;
+  font: 600 14px/1.21 Inter, Helvetica, Arial, serif;
   color: rgb(30 30 30);
 }
 .forgot{
@@ -276,8 +277,8 @@ input {
   width: 300px;
   height: 41px;
   background: #FEFEFE;
-  border: 1px solid #6F7482;
-  border-radius: 3px;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
   color: black;
   right: 4px;
   bottom: 3px;
@@ -285,8 +286,8 @@ input {
   font-style: normal; 
   font-weight: 600; 
   font-size: 14px;
-  &:focus{
-    border: 2px solid $active-color;
+  &:focus {
+    border: 2px solid #0084ff;
     outline: none;
   }
 }
@@ -313,6 +314,11 @@ input {
 
 .input-dob{
   margin-left: 10px;
+  border: 1px solid #d9e2ec;
+  &:focus {
+    border: 2px solid #0084ff;
+    outline: none;
+  }
 }
 .frame-31 {
   display: flex;

@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   width: 13.33%;
+  max-width: 11.76%;
   min-width: 0;
   background-color: rgb(255, 255, 255);
   outline-offset: 0;
@@ -33,7 +34,7 @@
   flex-direction: column;
   width: 100%;
   background-color: rgb(255, 255, 255);
-  box-shadow: $shadow;
+  
 }
 
 .brandingRow {
@@ -130,10 +131,52 @@
   }
 
   &:hover {
-    border-right: 2px solid $active-color1;
+    border-right: 2px solid #00b2ee;
   }
   @media (max-width: 1000px) {
     justify-content: center ; 
+  }
+}
+.activeNavItem{
+  display: flex;
+  column-gap: 12px;
+  align-items: center;
+  width: 100%;
+  padding: 2%;
+  padding-left: 15%;
+  @include tn {
+    
+    column-gap: 8px;
+    margin: 28px 8px 0;
+    padding-left: none;
+  }
+
+  
+  border-right: 2px solid #00b2ee;
+  
+  @media (max-width: 1000px) {
+    justify-content: center ; 
+  }
+  .dashboardIcon {
+    background-image: url('../../../public/assets/rec_active.png');
+  }
+  .profileIcon {
+    background-image: url('../../../public/assets/rec_active.png');
+  }
+  .goalIcon {
+    background-image: url('../../../public/assets/rec_active.png');
+  }
+  .warningIcon {
+    background-image: url('../../../public/assets/rec_active.png');
+  }
+  .investmentIcon {
+    background-image: url('../../../public/assets/rec_active.png');
+  }
+  .scheduleLink {
+    color: #00b2ee;
+  }
+  .portfolioLink {
+    color: #00b2ee;
   }
 }
 
@@ -145,46 +188,46 @@
 }
 
 .dashboardIcon {
-  background-image: url('../../../public/assets/dashboard.png');
+  background-image: url('../../../public/assets/rec.png');
 }
 
 .profileIcon {
-  background-image: url('../../../public/assets/profile.png');
+  background-image: url('../../../public/assets/rec.png');
 }
 
 .goalIcon {
-  background-image: url('../../../public/assets/goal.png');
+  background-image: url('../../../public/assets/rec.png');
 }
 
 .warningIcon {
-  background-image: url('../../../public/assets/warning.png');
+  background-image: url('../../../public/assets/rec.png');
 }
 
 .investmentIcon {
-  background-image: url('../../../public/assets/investment.png');
+  background-image: url('../../../public/assets/rec.png');
 }
 
 .portfolioNavItem:hover {
   .dashboardIcon {
-    background-image: url('../../../public/assets/dashboard_active.png');
+    background-image: url('../../../public/assets/rec_active.png');
   }
   .profileIcon {
-    background-image: url('../../../public/assets/profile_active.png');
+    background-image: url('../../../public/assets/rec_active.png');
   }
   .goalIcon {
-    background-image: url('../../../public/assets/goal_active.png');
+    background-image: url('../../../public/assets/rec_active.png');
   }
   .warningIcon {
-    background-image: url('../../../public/assets/warning_active.png');
+    background-image: url('../../../public/assets/rec_active.png');
   }
   .investmentIcon {
-    background-image: url('../../../public/assets/investment_active.png');
+    background-image: url('../../../public/assets/rec_active.png');
   }
   .scheduleLink {
-    color: $active-color1;
+    color: #00b2ee;
   }
   .portfolioLink {
-    color: $active-color1;
+    color: #00b2ee;
   }
 }
 
@@ -195,7 +238,7 @@
 
 .portfolioLink {
   text-decoration: none; 
-  color: rgb(0, 0, 0);
+  color: #adb3b9;
 
   @media (max-width: 1000px) {
     display: none; 
