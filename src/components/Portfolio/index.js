@@ -252,11 +252,24 @@ function Portfolio(props) {
                                       value={entry.subtype}
                                       onChange={(e) => handleEntryChange(entry.id, 'subtype', e.target.value)}
                                       displayEmpty
-                                      className={styles.inputName}
+                                      sx={{
+                                        fontFamily: "Inter",
+                                        fontStyle: "normal",
+                                        fontWeight: 600,
+                                        fontSize: "12.4px",
+                                        width: "100%",
+                                        borderRadius: "4px",
+                                        border: "px solid #ccc",
+                                      }}
                                       inputProps={{ 'data-testid': `subtype-select-${entry.id}` }}
-                                      autowidth
                                     >
-                                      <Option value="" disabled>
+                                      <Option sx={{
+                                        fontFamily: "Inter",
+                                        fontStyle: "normal",
+                                        fontWeight: 600,
+                                        fontSize: "12.4px",
+                                        lineHeight: "15px",
+                                      }} disabled>
                                         Select Subtype
                                       </Option>
                                       {subtypes.map((subtype) => (
@@ -275,7 +288,7 @@ function Portfolio(props) {
                                   </div>
 
                                   <div className={styles.inputFieldContainer}>
-                                    <label htmlFor="description">Description:</label>
+                                    <label htmlFor="description" className={styles.label1}>Description:</label>
                                     <input
                                       id="description"
                                       type="text"
@@ -289,7 +302,7 @@ function Portfolio(props) {
                                     <div className={styles.inputFieldContainer} key={input}>
                                       <label htmlFor={input}>{input}:</label>
                                       <input
-                                        id={input}
+                                        id="values"
                                         type="text"
                                         name={input}
                                         value={entry.inputs[input] || ''}

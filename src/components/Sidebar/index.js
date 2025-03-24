@@ -81,7 +81,7 @@ function Sidebar(props) {
             >
               <div className={`${styles.portfolioIcon} ${styles.investmentIcon}`} />
               <Link className={styles.portfolioLink} to={'/Projections'}>
-                Portfolio's
+                Projections
               </Link>
             </div>
           </div>

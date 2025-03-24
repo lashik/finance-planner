@@ -15,7 +15,8 @@
   justify-content: start;
   flex-direction: row;
 }
-.row1{
+
+.row1 {
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -23,6 +24,7 @@
   justify-content: space-between;
   align-items: start;
 }
+
 .portfolioSection {
   display: flex;
   flex-direction: column;
@@ -76,23 +78,24 @@
   align-content: stretch;
   margin: 0px 2.5% 0px 5%;
   max-width: 100%;
-  font: $font-family-primary; 
-  gap:20px;
+  font: $font-family-primary;
+  gap: 20px;
+
   .block5 {
-    flex: 1 1 30%; 
-    min-width: calc(30% - 20px); 
+    flex: 1 1 30%;
+    min-width: calc(30% - 20px);
   }
 
   @include md {
     .block5 {
-      flex: 1 1 100%; 
+      flex: 1 1 100%;
       max-width: 100%;
     }
   }
 
   @include xs {
     .block5 {
-      flex: 1 1 100%; 
+      flex: 1 1 100%;
       max-width: 100%;
     }
   }
@@ -116,7 +119,7 @@
   display: flex;
   height: auto;
   row-gap: 0;
-  margin:0px 8px 23px 13px;
+  margin: 10px 8px 23px 13px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -144,36 +147,44 @@
 .inputName {
   padding: 12px;
   margin-bottom: 10px;
-  color:$primary-text-color ; // Using primary text color
+  color: $primary-text-color ; // Using primary text color
   border: 1px solid #d9e2ec;
   border-radius: 6px; // Using border color
   font: $main-font;
+
   &:focus {
     border: 2px solid #0084ff;
     outline: none;
   }
 }
-.inputFieldContainer{
+
+.inputFieldContainer {
   display: flex;
-  font:$main-font;
+  font: $main-font;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
   width: 100%;
+  padding-left: 20px;
   //flex-grow: 1;
 }
-label {
 
-color: #2a2a2aad;
-flex-grow: 1;
-font-size: 14px !important;
-font-weight: 600; 
+.label1 {
+  color: #2a2a2aad;
+  min-width: 115px !important;
+  font-size: 14px !important;
+  font-weight: 600;
 }
-.inputField{
+label{
+  color: #2a2a2aad;
+  
+  font-size: 14px !important;
+  font-weight: 600;
+}
+.inputField {
   width: 100%;
   padding: 12px;
-  
   font: $main-font;
   font-size: 12px;
   background-color: white;
@@ -182,12 +193,13 @@ font-weight: 600;
   transition: border 0.1s ease-in-out;
   border: 1px solid #d9e2ec;
   border-radius: 6px;
- 
+
   &:focus {
     border: 2px solid #0084ff;
     outline: none;
   }
 }
+
 .info6 {
   font-family: $font-family-primary; // Using primary font
   font-style: normal;
@@ -225,17 +237,18 @@ option {
 .addButton,
 .removeButton {
   margin-top: 10px;
-   // Body text font size
+  // Body text font size
   background-color: #0084FF; // Using secondary button background
   color: #0084FF; // Using secondary button text color
   border-radius: $button-border-radius; // Using button border radius
   padding: 0px; // Using button padding
   font: $main-font;
   font-size: 20px;
- 
+
 }
-.collapse{
+
+.collapse {
   display: relative;
-  top:0px;
-  left: 51% ;
+  top: 0px;
+  left: 51%;
 }

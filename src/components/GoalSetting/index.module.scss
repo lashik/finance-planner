@@ -38,7 +38,7 @@ label {
   margin-bottom: 5px;
 }
 
-.inputField,
+
 .selectField {
   padding: 10px;
   font-size: 16px;
@@ -46,7 +46,24 @@ label {
   border-radius: 4px;
   color: #333;
 }
-
+.inputField{
+  width: 100%;
+  padding: 12px;
+  
+  font: $main-font;
+  font-size: 12px;
+  background-color: white;
+  max-width: 308px;
+  color: #2a2a2a;
+  transition: border 0.1s ease-in-out;
+  border: 1px solid #d9e2ec;
+  border-radius: 6px;
+ 
+  &:focus {
+    border: 2px solid #0084ff;
+    outline: none;
+  }
+}
 .proposedInvestments {
   padding: 10px;
   font-size: 16px;
