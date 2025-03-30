@@ -41,10 +41,16 @@ label {
 
 .selectField {
   padding: 10px;
-  font-size: 16px;
+  font: $main-font;
+  
   border: 1px solid #ccc;
   border-radius: 4px;
   color: #333;
+}
+.options{
+  font: $main-font;
+  border-radius: 4px;
+  color: #33333385;
 }
 .inputField{
   width: 100%;
@@ -66,6 +72,8 @@ label {
 }
 .proposedInvestments {
   padding: 10px;
+  font: $main-font;
+  font-weight: 400;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;

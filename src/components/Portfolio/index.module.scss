@@ -76,15 +76,12 @@
   flex-flow: row wrap;
   align-items: flex-start;
   align-content: stretch;
-  margin: 0px 2.5% 0px 5%;
+  margin: 0px 0.5% 0px 2%;
   max-width: 100%;
   font: $font-family-primary;
   gap: 20px;
 
-  .block5 {
-    flex: 1 1 30%;
-    min-width: calc(30% - 20px);
-  }
+  
 
   @include md {
     .block5 {
@@ -106,7 +103,7 @@
   flex-direction: column;
   box-shadow: $card-shadow; // Using card shadow
   gap: 0px;
-  max-width: 500px;
+  //max-width: 500px;
   width: 100%;
   max-height: max-content;
   overflow: hidden;
@@ -134,7 +131,7 @@
 .row8 {
   display: flex;
   justify-content: space-evenly;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 10px;
   margin: 27px 0 0;
   gap: 20px;

@@ -8,7 +8,7 @@ import Sidebar from 'components/Sidebar';
 import Header from 'components/Header';
 
 function RiskAdjustments(props) {
-  const [riskLevel, setRiskLevel] = useState(50); 
+  const [riskLevel, setRiskLevel] = useState(50);
   const [portfolio, setPortfolio] = useState([]);
   const [existingInvestments, setExistingInvestments] = useState({});
 
@@ -43,39 +43,106 @@ function RiskAdjustments(props) {
 
         const simplifiedCategory = categoryMapping[category] || category;
 
-        if (risk < 33) {
-          // Low risk
-          if (simplifiedCategory === 'Commodities' || simplifiedCategory === 'Real Estate' || simplifiedCategory === 'Fixed-Income') {
-            adjustmentFactor = 0.7;
-          } else if (simplifiedCategory === 'Equity') {
-            adjustmentFactor = 0.2;
-          } else if (simplifiedCategory === 'Cryptocurrencies & Digital Assets') {
-            adjustmentFactor = 0.05;
-          } else if (simplifiedCategory === 'Cash & Cash Equivalents') {
-            adjustmentFactor = 0.025;
-          }
-        } else if (risk < 66) {
-          // Medium risk
-          adjustmentFactor = 0.3; 
-        } else {
-          // High risk
-          if (simplifiedCategory === 'Commodities' || simplifiedCategory === 'Real Estate' || simplifiedCategory === 'Fixed-Income') {
-            adjustmentFactor = 0.1;
-          } else if (simplifiedCategory === 'Equity') {
-            adjustmentFactor = 0.4;
-          } else if (simplifiedCategory === 'Cryptocurrencies & Digital Assets') {
-            adjustmentFactor = 0.3;
-          } else if (simplifiedCategory === 'Cash & Cash Equivalents') {
-            adjustmentFactor = 0.025;
-          }
+        // Define adjustment factors for each risk level
+        const riskAdjustments = {
+          low: {
+            "Direct Stocks": 0.1,
+            "Equity Mutual Funds": 0.07,
+            "Exchange-Traded Funds (ETFs)": 0.05,
+            "Small-Cap, Mid-Cap, Large-Cap Stocks": 0.03,
+            "Government Bonds": 0.05,
+            "Corporate Bonds": 0,
+            "Fixed Deposits (FDs)": 0.45,
+            "Debt Mutual Funds": 0.05,
+            "Residential Property": 0.1,
+            "Commercial Property": 0,
+            "Real Estate Investment Trusts (REITs)": 0,
+            "Gold & Silver": 0.05,
+            "Oil & Natural Gas": 0,
+            "Agricultural Commodities": 0,
+            "Private Equity": 0,
+            "Hedge Funds": 0,
+            "Collectibles": 0,
+            "Bitcoin": 0,
+            "Non-Fungible Tokens (NFTs)": 0,
+            "Options": 0,
+            "Swaps": 0,
+            "Savings Accounts": 0.05,
+            "Money Market Funds": 0,
+            "Treasury Bills (T-Bills)": 0,
+          },
+          medium: {
+            "Direct Stocks": 0.15,
+            "Equity Mutual Funds": 0.1,
+            "Exchange-Traded Funds (ETFs)": 0.05,
+            "Small-Cap, Mid-Cap, Large-Cap Stocks": 0.05,
+            "Government Bonds": 0.03,
+            "Corporate Bonds": 0,
+            "Fixed Deposits (FDs)": 0.3,
+            "Debt Mutual Funds": 0.07,
+            "Residential Property": 0.1,
+            "Commercial Property": 0,
+            "Real Estate Investment Trusts (REITs)": 0,
+            "Gold & Silver": 0.03,
+            "Oil & Natural Gas": 0,
+            "Agricultural Commodities": 0,
+            "Private Equity": 0,
+            "Hedge Funds": 0,
+            "Collectibles": 0,
+            "Bitcoin": 0,
+            "Non-Fungible Tokens (NFTs)": 0,
+            "Options": 0.05,
+            "Swaps": 0.05,
+            "Savings Accounts": 0.02,
+            "Money Market Funds": 0,
+            "Treasury Bills (T-Bills)": 0,
+          },
+          high: {
+            "Direct Stocks": 0.15,
+            "Equity Mutual Funds": 0.25,
+            "Exchange-Traded Funds (ETFs)": 0.05,
+            "Small-Cap, Mid-Cap, Large-Cap Stocks": 0.05,
+            "Government Bonds": 0.03,
+            "Corporate Bonds": 0,
+            "Fixed Deposits (FDs)": 0.05,
+            "Debt Mutual Funds": 0.07,
+            "Residential Property": 0.1,
+            "Commercial Property": 0,
+            "Real Estate Investment Trusts (REITs)": 0,
+            "Gold & Silver": 0.05,
+            "Oil & Natural Gas": 0,
+            "Agricultural Commodities": 0,
+            "Private Equity": 0.05,
+            "Hedge Funds": 0,
+            "Collectibles": 0,
+            "Bitcoin": 0.03,
+            "Non-Fungible Tokens (NFTs)": 0,
+            "Options": 0.05,
+            "Swaps": 0.05,
+            "Savings Accounts": 0.02,
+            "Money Market Funds": 0,
+            "Treasury Bills (T-Bills)": 0,
+          },
+        };
+
+        // Determine the risk level
+        let riskLevel = "low";
+        if (risk >= 33 && risk < 66) {
+          riskLevel = "medium";
+        } else if (risk >= 66) {
+          riskLevel = "high";
         }
 
+        // Get the adjustment factor for the specific subtype
+        adjustmentFactor = riskAdjustments[riskLevel][item.type] || 0;
+
+        // Calculate the new value
         const newValue = (oldValue * adjustmentFactor).toFixed(2);
 
         updatedPortfolio.push({
-          name: item.type || 'Unnamed Investment', 
+          name: item.type || "Unnamed Investment",
           oldValue: oldValue.toFixed(2),
-          newValue: newValue
+          newValue: newValue,
         });
       });
     }
@@ -95,7 +162,7 @@ function RiskAdjustments(props) {
         console.error('Error fetching portfolio:', error.message);
       } else if (data && data.existing_investments) {
         setExistingInvestments(data.existing_investments);
-        updatePortfolio(riskLevel); 
+        updatePortfolio(riskLevel);
       }
     };
 

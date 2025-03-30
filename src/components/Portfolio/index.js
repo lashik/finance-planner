@@ -5,7 +5,6 @@ import styles from './index.module.scss';
 import Header from 'components/Header';
 import Sidebar from 'components/Sidebar';
 import IconButton from '@mui/material/IconButton';
-
 import { Delete, Add } from '@mui/icons-material';
 import { Option, Select } from '@mui/joy';
 import { Button } from '@mui/material';
@@ -13,7 +12,6 @@ import { supabase } from 'supabaseClient';
 import { globalVar } from 'db';
 import { useNavigate } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
-import InputField from 'components/InputFields';
 
 const investmentTypes = [
   {
@@ -72,7 +70,7 @@ const investmentTypes = [
     subtypes: [
       { name: "Options", inputs: ["expected_return", "invested_amount"] },
       { name: "Futures", inputs: ["expected_return", "invested_amount"] },
-      { name: "Swaps", inputs: ["expected_return", "invested_amount"] }
+      { name: "Swaps", inputs: ["expected_return", "invested_amount"] },
     ]
   },
   {
@@ -144,30 +142,67 @@ function Portfolio(props) {
     }));
   };
 
-  const handleInputChange = (id, input, value) => {
-    setInvestmentEntries((prevEntries) => {
-      const newEntries = prevEntries.map((entry) =>
+  const handleInputChange = (id, input, event) => {
+    const { value } = event.target;
+    setInvestmentEntries((prevEntries) =>
+      prevEntries.map((entry) =>
         entry.id === id
-          ? { ...entry, inputs: { ...entry.inputs, [input]: value || "" } }
+          ? {
+            ...entry,
+            inputs: {
+              ...entry.inputs,
+              [input]: value,
+            },
+          }
           : entry
-      );
-      return newEntries;
-    });
+      )
+    );
   };
 
   const handleEntryChange = (id, field, value) => {
-    setInvestmentEntries((prevEntries) => {
-      const newEntries = prevEntries.map((entry) =>
-        entry.id === id ? { ...entry, [field]: value } : entry
-      );
-      return newEntries;
-    });
+    setInvestmentEntries((prevEntries) =>
+      prevEntries.map((entry) => {
+        if (entry.id === id) {
+          // When changing subtype, we need to update the inputs based on the new subtype
+          if (field === 'subtype') {
+            const categoryData = investmentTypes.find(type => type.category === entry.category);
+            const newSubtype = categoryData?.subtypes.find(sub => sub.name === value);
+            const newInputs = newSubtype?.inputs.reduce((acc, input) => {
+              acc[input] = entry.inputs[input] || ''; // Keep existing value if available
+              return acc;
+            }, {}) || {};
+
+            return {
+              ...entry,
+              subtype: value,
+              inputs: newInputs
+            };
+          }
+          return { ...entry, [field]: value };
+        }
+        return entry;
+      })
+    );
   };
 
   const handleAddEntry = (category) => {
+    const categorySubtypes = investmentTypes.find((type) => type.category === category)?.subtypes || [];
+    const defaultSubtype = categorySubtypes[0] || { name: "", inputs: [] };
+
+    const preloadedInputs = defaultSubtype.inputs.reduce((acc, input) => {
+      acc[input] = ""; // Initialize each input field with an empty string
+      return acc;
+    }, {});
+
     setInvestmentEntries((prevEntries) => [
       ...prevEntries,
-      { id: uuidv4(), category, subtype: "", description: "", inputs: {} }
+      {
+        id: uuidv4(),
+        category,
+        subtype: defaultSubtype.name, // Set the default subtype
+        description: "",
+        inputs: preloadedInputs, // Preload the inputs for the default subtype
+      },
     ]);
   };
 
@@ -186,7 +221,7 @@ function Portfolio(props) {
       updatedInvestments[category].push({
         type: subtype,
         ...inputs,
-        description
+        description,
       });
     });
 
@@ -210,14 +245,16 @@ function Portfolio(props) {
         <Sidebar />
         <div className={styles.portfolioSection}>
           <Header />
-          <div style={{ display: 'flex', justifyContent: 'space-between', flexDirection: 'row', alignContent: 'center' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexDirection: "row",
+              alignContent: "center",
+            }}
+          >
             <div className={styles.portfolioTitle}>My Portfolio</div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleSubmit}
-              className={styles.submit}
-            >
+            <Button variant="contained" color="primary" onClick={handleSubmit} className={styles.submit}>
               Submit
             </Button>
           </div>
@@ -225,97 +262,103 @@ function Portfolio(props) {
             <div>Loading investments...</div>
           ) : (
             <div className={styles.profileGrid}>
-              {/* Create 3 columns */}
-              <div style={{ display: 'flex', flexDirection: 'row', gap: '20px', width: '100%' }}>
-                {[0, 1, 2].map((colIndex) => (
-                  <div key={colIndex} style={{ display: 'flex', flexDirection: 'column', flex: 1, gap: '20px' }}>
-                    {investmentTypes
-                      .filter((_, index) => index % 3 === colIndex) // Distribute items into columns
-                      .map(({ category, subtypes }) => (
-                        <div key={category} className={styles.block5}>
-                          <div className={styles.row6}>
-                            <div className={styles.info6}>{category}</div>
-                            <IconButton onClick={() => handleAddEntry(category)} className={styles.addButton}>
-                              <Add />
-                            </IconButton>
-                          </div>
-                          {investmentEntries
-                            .filter((entry) => entry.category === category)
-                            .map((entry) => {
-                              const selectedSubtype = subtypes.find((sub) => sub.name === entry.subtype) || {
-                                inputs: [],
-                              };
-                              return (
-                                <div key={entry.id} className={styles.row8}>
-                                  <div className={styles.row1}>
-                                    <Select
-                                      value={entry.subtype}
-                                      onChange={(e) => handleEntryChange(entry.id, 'subtype', e.target.value)}
-                                      displayEmpty
+              {/* Single block5 encompassing all form fields */}
+              <div className={styles.block5}>
+                {investmentTypes.map(({ category, subtypes }) => (
+                  <div key={category} className={styles.categorySection}>
+                    <div className={styles.row6} style={{ cursor: "pointer" }}>
+                      <div className={styles.info6}>{category}</div>
+                      <div className={styles.info7} onClick={() => handleCollapse(category)}>
+                        {collapsedCategories[category] ? "^" : "v"}
+                      </div>
+                      <IconButton onClick={() => handleAddEntry(category)} className={styles.addButton}>
+                        <Add />
+                      </IconButton>
+                    </div>
+                    {!collapsedCategories[category] && (
+                      <>
+                        {investmentEntries
+                          .filter((entry) => entry.category === category)
+                          .map((entry) => {
+                            const selectedSubtype = subtypes.find((sub) => sub.name === entry.subtype) || {
+                              inputs: [],
+                            };
+                            return (
+                              <div key={entry.id} className={styles.row8}>
+                                <div className={styles.row1}>
+                                  <Select
+                                    value={entry.subtype}
+                                    onChange={(event, newValue) => handleEntryChange(entry.id, "subtype", newValue)}
+                                    displayEmpty
+                                    sx={{
+                                      fontFamily: "Inter",
+                                      fontStyle: "normal",
+                                      fontWeight: 600,
+                                      fontSize: "12.4px",
+                                      width: "100%",
+                                      borderRadius: "4px",
+                                      border: "1px solid #ccc",
+                                    }}
+                                    inputProps={{ "data-testid": `subtype-select-${entry.id}` }}
+                                  >
+                                    <Option
                                       sx={{
                                         fontFamily: "Inter",
                                         fontStyle: "normal",
                                         fontWeight: 600,
                                         fontSize: "12.4px",
-                                        width: "100%",
-                                        borderRadius: "4px",
-                                        border: "px solid #ccc",
-                                      }}
-                                      inputProps={{ 'data-testid': `subtype-select-${entry.id}` }}
-                                    >
-                                      <Option sx={{
-                                        fontFamily: "Inter",
-                                        fontStyle: "normal",
-                                        fontWeight: 600,
-                                        fontSize: "12.4px",
                                         lineHeight: "15px",
-                                      }} disabled>
-                                        Select Subtype
-                                      </Option>
-                                      {subtypes.map((subtype) => (
-                                        <Option key={subtype.name} value={subtype.name}>
-                                          {subtype.name}
-                                        </Option>
-                                      ))}
-                                    </Select>
-                                    <IconButton
-                                      size="small"
-                                      onClick={() => handleRemoveEntry(entry.id)}
-                                      className={styles.removeButton}
+                                      }}
+                                      disabled
                                     >
-                                      <Delete />
-                                    </IconButton>
-                                  </div>
+                                      Select Subtype
+                                    </Option>
+                                    {subtypes.map((subtype) => (
+                                      <Option key={subtype.name} value={subtype.name}>
+                                        {subtype.name}
+                                      </Option>
+                                    ))}
+                                  </Select>
+                                </div>
 
-                                  <div className={styles.inputFieldContainer}>
-                                    <label htmlFor="description" className={styles.label1}>Description:</label>
+                                <div className={styles.inputFieldContainer}>
+                                  <label htmlFor="description" className={styles.label1}>
+                                    Description:
+                                  </label>
+                                  <input
+                                    id="description"
+                                    type="text"
+                                    name="description"
+                                    value={entry.description}
+                                    onChange={(e) => handleEntryChange(entry.id, "description", e.target.value)}
+                                    className={styles.inputField}
+                                  />
+                                </div>
+                                {selectedSubtype.inputs.map((input) => (
+                                  <div className={styles.inputFieldContainer} key={input}>
+                                    <label htmlFor={input}>{input}:</label>
                                     <input
-                                      id="description"
+                                      id={input}
                                       type="text"
-                                      name="description"
-                                      value={entry.description}
-                                      onChange={(e) => handleEntryChange(entry.id, 'description', e.target.value)}
+                                      name={input}
+                                      value={entry.inputs[input] || ""}
+                                      onChange={(e) => handleInputChange(entry.id, input, e)}
                                       className={styles.inputField}
                                     />
                                   </div>
-                                  {selectedSubtype.inputs.map((input) => (
-                                    <div className={styles.inputFieldContainer} key={input}>
-                                      <label htmlFor={input}>{input}:</label>
-                                      <input
-                                        id="values"
-                                        type="text"
-                                        name={input}
-                                        value={entry.inputs[input] || ''}
-                                        onChange={(e) => handleInputChange(entry.id, input, e.target.value)}
-                                        className={styles.inputField}
-                                      />
-                                    </div>
-                                  ))}
-                                </div>
-                              );
-                            })}
-                        </div>
-                      ))}
+                                ))}
+                                <IconButton
+                                  size="small"
+                                  onClick={() => handleRemoveEntry(entry.id)}
+                                  className={styles.removeButton}
+                                >
+                                  <Delete />
+                                </IconButton>
+                              </div>
+                            );
+                          })}
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
