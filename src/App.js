@@ -15,6 +15,8 @@ import GoalSetting from 'components/GoalSetting';
 import RiskAdjustments from 'components/RiskAdjustments';
 import PortfolioMy from 'components/PortfolioMy';
 
+import SwapFund from './components/SwapFund';
+
 function App() {
   useEffect(() => {
     setTimeout(() => {
@@ -42,6 +44,7 @@ function App() {
           <Route path="/Goal" element={<GoalSetting/>} />
           <Route path="/Risk" element={<RiskAdjustments/>} />
           <Route path="/Projections" element={<PortfolioMy/>} />
+          <Route path="/Card" element={<SwapFund/>} />
         </Routes>
       </Router>
     </>

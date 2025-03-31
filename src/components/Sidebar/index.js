@@ -84,6 +84,16 @@ function Sidebar(props) {
                 Projections
               </Link>
             </div>
+            <div
+              className={`${styles.portfolioNavItem} ${
+                isActive('/Projections') ? styles.activeNavItem : ''
+              }`}
+            >
+              <div className={`${styles.portfolioIcon} ${styles.investmentIcon}`} />
+              <Link className={styles.portfolioLink} to={'/Card'}>
+                Swap Fund
+              </Link>
+            </div>
           </div>
         </nav>
       </div>
