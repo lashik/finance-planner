@@ -1,0 +1,290 @@
+/* dashboard.css */
+.true-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #EAECF8;
+}
+
+.title {
+    margin: 9.28571px 0px;
+    padding: 0px 0px 10px;
+    font: normal 600 24px/30px Poppins;
+}
+
+.orders-header {
+    margin-bottom: 20px;
+    font: normal 500 20px Poppins;
+}
+
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.dashboard-content {
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px;
+
+    background-color: #EAECF8;
+}
+
+.dashboard-container {
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #EAECF8;
+    width: 100%;
+}
+
+.list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #4848B512;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    padding: 13px;
+    width: 100%;
+    font-size: 13px;
+    line-height: 19.5px;
+}
+
+.list:hover {
+    background-color: #F0F3F6;
+    transition: background-color 0.2s linear;
+}
+
+.dashboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-value {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.text-green {
+    color: #4caf50;
+}
+
+.text-red {
+    color: #f44336;
+}
+
+/* Orders Section */
+.orders-section {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.order-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+}
+
+.order-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.order-value {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.order-change {
+    font-size: 14px;
+}
+
+/* Stock Watchlist Section */
+.stock-watchlist-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    height: 100%;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.tab {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: #f9f9f9;
+    cursor: pointer;
+}
+
+.tab-active {
+    padding: 5px 10px;
+    background: #4caf50;
+    border: 1px solid #ccc;
+    color: #fff;
+    border-color: #4caf50;
+}
+
+.grid2 {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100%;
+}
+
+/* Details Section */
+.details-section,
+.total-section {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0px 0px 19.5px;
+
+
+}
+
+.details-section {
+    height: 100%;
+    flex-grow: 4;
+
+}
+
+.total-section {
+    padding: 20px;
+}
+
+.details-header {
+    border-bottom: 1px solid #F0F3F6;
+    border-radius: 5px 5px 0px 0px;
+    box-sizing: border-box;
+    padding: 19.5px;
+    font-size: 17.55px;
+    position: relative;
+}
+
+/* Funds in Category Section */
+.funds-category-section {
+    background: #fff;
+    padding-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    height: 100%;
+}
+
+.fund-card {
+    width: 100%;
+    background: #f1f1f1;
+    padding: 15px;
+    border-radius: 8px;
+
+}
+
+/* Investment Return Section */
+.investment-return-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.progress-label {
+    width: 50px;
+}
+
+.progress-bar {
+    height: 10px;
+    background: #4caf50;
+    border-radius: 5px;
+    flex: 1;
+}
+
+/* Riskometer Section */
+.riskometer-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.risk-level {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.content-wrapper {
+    -moz-transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    -o-transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    -webkit-transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    
+    z-index: 820;
+}
+
+.content-wrapper {
+    min-height: 100%;
+    background-color: #EAEDF7;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    overflow: hidden;
+    border-radius: 1.25rem;
+}
+.content {
+    min-height: 250px;
+    padding: 1.5rem 1.5rem 0px 1.5rem;
+    margin-right: auto;
+}
