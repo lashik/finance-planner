@@ -22,9 +22,9 @@
 .portfolioTitle{
   font:$main-font;
   font-size: 20px;
-  margin-left: 3%;
+  
   width: fit-content;
-  margin-top: 4%;
+  
 }
 
 
@@ -53,10 +53,10 @@
 .profileGrid {
   display: flex;
   flex-direction: row;
-  justify-content: start;
-  margin: 0px  0px 0px 5%;
+  justify-content: center;
+  margin: 0px  25% 0px 20px;
   width: 100%;
-  gap: 15%;
+  gap: 40px;
   //row-gap: 15px;
   
   grid-template-columns:1fr 1fr;
@@ -73,6 +73,14 @@
     column-gap: 16px;
     
   }
+}
+.portfolioHeader{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 .row1{
   display: flex;
@@ -365,7 +373,7 @@ option {
   font-size: 12.4px;
   //top: 50%;
   background-color: #86DCDB;
-  border-radius: 100px;
+  border-radius: 10px;
   align-items: center;
-  margin-left: 90%;
+  
 }

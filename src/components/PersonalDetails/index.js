@@ -77,8 +77,10 @@ function PersonalDetails(props) {
           <Header />
 
 
-          <p className={styles.portfolioTitle}>Personal Details</p>
-          <button className={styles.addButton} onClick={handleSubmit}>Save</button>
+          <div className={styles.portfolioHeader}>
+            <p className={styles.portfolioTitle}>Personal Details</p>
+            <button className={styles.addButton} onClick={handleSubmit}>Save</button>
+          </div>
           <div className={styles.profileGrid}>
             {/* Grid of user profiles with personal details */}
             <div className={styles.row1}>

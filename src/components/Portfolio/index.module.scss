@@ -221,7 +221,7 @@ option {
   width: max-content;
   height: 40px;
   font: $font-weight-semi-bold $font-size-body/$font-size-body $font-family-primary; // Using typography variables
-  background: $button-primary-bg; // Using primary button background
+  background: #86DCDB; // Using primary button background
   border-radius: $button-border-radius; // Using button border radius
   align-items: center;
   margin-top: 20px;
@@ -235,7 +235,7 @@ option {
 .removeButton {
   margin-top: 10px;
   // Body text font size
-  background-color: #0084FF; // Using secondary button background
+  background-color: #86DCDB; // Using secondary button background
   color: #0084FF; // Using secondary button text color
   border-radius: $button-border-radius; // Using button border radius
   padding: 0px; // Using button padding

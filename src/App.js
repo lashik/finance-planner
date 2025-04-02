@@ -14,7 +14,7 @@ import Fpassword from 'components/Fpassword';
 import GoalSetting from 'components/GoalSetting';
 import RiskAdjustments from 'components/RiskAdjustments';
 import PortfolioMy from 'components/PortfolioMy';
-
+import Card from 'components/Card';
 import SwapFund from './components/SwapFund';
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
           <Route path="/Risk" element={<RiskAdjustments/>} />
           <Route path="/Projections" element={<PortfolioMy/>} />
           <Route path="/Card" element={<SwapFund/>} />
+          <Route path="/a1" element={<Card/>} />
         </Routes>
       </Router>
     </>

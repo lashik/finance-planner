@@ -92,9 +92,50 @@ label {
   max-width: 1000px;
 }
 .form{
-  width: 50%;
+  width: 100%;
+  gap: 100px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-self: center;
+}
+.portfolioContainer {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.portfolioTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.portfolioList {
+  list-style: none;
+  padding: 0;
+}
+
+.portfolioItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  padding: 10px 10px 5px 20px;
+  border-bottom: 1px solid #ccc;
+  width: 100%; 
+}
+
+.portfolioName {
+  font-size: 16px;
+  flex: 1; 
+  text-align: left; 
+  padding-right: 20px;
+}
+
+.portfolioValue {
+  font-size: 16px;
+  font-weight: normal;
+  flex: 0 0 200px; 
+  text-align: left; 
+  margin-left: 10px; 
 }

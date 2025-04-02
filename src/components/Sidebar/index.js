@@ -26,11 +26,11 @@ function Sidebar(props) {
             
             <div
               className={`${styles.portfolioNavItem} ${
-                isActive('/Dashboard') ? styles.activeNavItem : ''
+                isActive('/a1') ? styles.activeNavItem : ''
               }`}
             >
               <div className={`${styles.portfolioIcon} ${styles.dashboardIcon}`} />
-              <Link className={styles.portfolioLink} to={'/Dashboard'}>
+              <Link className={styles.portfolioLink} to={'/a1'}>
                 Dashboard
               </Link>
             </div>
@@ -86,7 +86,7 @@ function Sidebar(props) {
             </div>
             <div
               className={`${styles.portfolioNavItem} ${
-                isActive('/Projections') ? styles.activeNavItem : ''
+                isActive('/Card') ? styles.activeNavItem : ''
               }`}
             >
               <div className={`${styles.portfolioIcon} ${styles.investmentIcon}`} />
