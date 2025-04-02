@@ -114,7 +114,7 @@ function Register(props) {
             alert("Error: " + error.message);
           } else {
             setGlobalVar(formData.email);
-            navigate("/Dashboard");
+            navigate("/a1");
           }
         }
       } else {
@@ -128,7 +128,7 @@ function Register(props) {
           alert("Error: " + error.message);
         } else if (data.length > 0) {
           setGlobalVar(formData.userId);
-          navigate("/Dashboard");
+          navigate("/a1");
         } else {
           alert("Invalid credentials");
         }
